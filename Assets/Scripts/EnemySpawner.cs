@@ -1,17 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab; 
+    public GameObject enemyPrefab;
 
     public int poolSize = 20;
 
     private List<GameObject> enemyPool;
 
-    public float minSpawnTime = 2f; 
-    public float maxSpawnTime = 5f; 
+    public float minSpawnTime = 2f;
+    public float maxSpawnTime = 5f;
 
     void Start()
     {
@@ -22,15 +22,15 @@ public class EnemySpawner : MonoBehaviour
             enemy.SetActive(false);
             enemyPool.Add(enemy);
         }
-        StartCoroutine(SpawnEnemyRoutine());
+        SpawnEnemyRoutine().Forget();
     }
 
-    IEnumerator SpawnEnemyRoutine()
+    private async UniTaskVoid SpawnEnemyRoutine()
     {
         while (true)
         {
             float spawnDelay = Random.Range(minSpawnTime, maxSpawnTime);
-            yield return new WaitForSeconds(spawnDelay);
+            await UniTask.Delay(System.TimeSpan.FromSeconds(spawnDelay));
 
             SpawnEnemy();
         }
@@ -42,11 +42,10 @@ public class EnemySpawner : MonoBehaviour
         {
             if (!enemy.activeInHierarchy)
             {
-                // Reset enemy's health (assuming HealthBar is a component of the enemyPrefab)
                 HealthBar healthBar = enemy.GetComponent<HealthBar>();
                 if (healthBar != null)
                 {
-                    healthBar.ResetHealth(); // Call the ResetHealth() method of HealthBar
+                    healthBar.ResetHealth();
                 }
 
                 enemy.transform.position = transform.position;
