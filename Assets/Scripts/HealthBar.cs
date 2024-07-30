@@ -6,6 +6,8 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     private int totalHealth = 5;
     private int health = 5;
+    [SerializeField]
+    private int hitPoints = 1;
 
     public void Start()
     {
@@ -30,6 +32,10 @@ public class HealthBar : MonoBehaviour
     void Death()
     {
         gameObject.SetActive(false);
+        if (gameObject.tag != "player")
+        {
+            ScoreManager.Instance.AddPoints(hitPoints);
+        }
     }
 
     public void ResetHealth()

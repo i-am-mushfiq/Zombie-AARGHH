@@ -396,3 +396,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 7730140957960622840}
   totalHealth: 5
+  hitPoints: 10

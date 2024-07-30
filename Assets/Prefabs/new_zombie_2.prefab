@@ -195,6 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 4681280367599098951}
   totalHealth: 1
+  hitPoints: 1
 --- !u!1 &6510550200856937153
 GameObject:
   m_ObjectHideFlags: 0
