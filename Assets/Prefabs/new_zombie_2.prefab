@@ -196,6 +196,7 @@ MonoBehaviour:
   healthBar: {fileID: 4681280367599098951}
   totalHealth: 1
   hitPoints: 1
+  particleSystemPool: {fileID: 4671349805359187887, guid: 70e7ee8e470254a40858a2498c799a2c, type: 3}
 --- !u!1 &6510550200856937153
 GameObject:
   m_ObjectHideFlags: 0

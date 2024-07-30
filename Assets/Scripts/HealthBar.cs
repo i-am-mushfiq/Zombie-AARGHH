@@ -9,6 +9,8 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     private int hitPoints = 1;
 
+    public ParticleSystemPool particleSystemPool;
+
     public void Start()
     {
         health = totalHealth;
@@ -36,6 +38,7 @@ public class HealthBar : MonoBehaviour
         {
             ScoreManager.Instance.AddPoints(hitPoints);
         }
+        particleSystemPool.ActivateParticleSystem(Vector3.zero);
     }
 
     public void ResetHealth()
