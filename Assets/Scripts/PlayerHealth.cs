@@ -6,8 +6,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     private int totalHealth = 5;
     private int health = 5;
-    [SerializeField]
-    private int hitPoints = 1;
 
     // Reference to the GameOver UI parent
     [SerializeField]

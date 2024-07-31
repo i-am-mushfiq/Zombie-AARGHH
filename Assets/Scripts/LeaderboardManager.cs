@@ -1,13 +1,13 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.Events;
 
 public class LeaderboardManager : MonoBehaviour
 {
     [SerializeField]
     private TMP_InputField inputName;
 
-    public UnityEvent<string, int> SubmitScoreEvent;
+    [SerializeField]
+    private Leaderboard leaderboard;
 
     public void SubmitScore()
     {
@@ -28,8 +28,15 @@ public class LeaderboardManager : MonoBehaviour
             return;
         }
 
-        Debug.Log("Invoking SubmitScoreEvent...");
-        SubmitScoreEvent.Invoke(username, score);
-        Debug.Log("SubmitScoreEvent invoked successfully.");
+        // Update the leaderboard with the new score
+        if (leaderboard != null)
+        {
+            leaderboard.AddLeaderboardEntry(username, score);
+            Debug.Log("Leaderboard updated with new entry.");
+        }
+        else
+        {
+            Debug.LogError("Leaderboard is not assigned in the LeaderboardManager.");
+        }
     }
 }
