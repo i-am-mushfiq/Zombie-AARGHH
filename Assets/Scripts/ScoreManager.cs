@@ -32,4 +32,10 @@ public class ScoreManager : MonoBehaviour
     {
         scoreText.text = "Score: " + score;
     }
+
+    // New method to get the current score
+    public int GetScore()
+    {
+        return score;
+    }
 }

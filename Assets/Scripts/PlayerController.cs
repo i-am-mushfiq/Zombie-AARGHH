@@ -13,8 +13,7 @@ public class PlayerController : MonoBehaviour
     public bool isFacingRight = true;
     private bool controlsEnabled = true;
     public BulletController bulletController;
-    public HealthBar healthBarScript; // Reference to the HealthBar script
-
+    public PlayerHealth playerHealth; 
     void Awake()
     {
         Debug.Log("PlayerController Awake");
@@ -91,9 +90,9 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage()
     {
-        if (controlsEnabled && healthBarScript != null)
+        if (controlsEnabled && playerHealth != null)
         {
-            healthBarScript.TakeDamage();
+            playerHealth.TakeDamage();
         }
     }
 
@@ -110,7 +109,7 @@ public class PlayerController : MonoBehaviour
     {
         if (controlsEnabled)
         {
-            Destroy(gameObject);
+            playerHealth.Death();
         }
     }
 
