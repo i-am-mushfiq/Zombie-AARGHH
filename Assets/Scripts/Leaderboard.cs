@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -71,12 +70,7 @@ public class Leaderboard : MonoBehaviour
         else
         {
             Debug.LogWarning("Leaderboard file not found. Initializing with default values.");
-            // Initialize with default values if the file is not found
-            for (int i = 0; i < names.Count; ++i)
-            {
-                names[i].text = "N/A";
-                scores[i].text = "0";
-            }
+            InitializeDefaultLeaderboard();
         }
     }
 
@@ -84,7 +78,7 @@ public class Leaderboard : MonoBehaviour
     {
         Debug.Log($"Adding new leaderboard entry: Username = {username}, Score = {score}");
 
-        // Find if the username already exists and update the score
+        // Check if the username already exists and update the score
         bool entryUpdated = false;
         for (int i = 0; i < names.Count; ++i)
         {
@@ -96,20 +90,50 @@ public class Leaderboard : MonoBehaviour
             }
         }
 
-        // If the username doesn't exist, add a new entry
+        // If the username doesn't exist, insert a new entry in the correct position
         if (!entryUpdated)
         {
-            for (int i = 0; i < names.Count; ++i)
-            {
-                if (names[i].text == "N/A")
-                {
-                    names[i].text = username;
-                    scores[i].text = score.ToString();
-                    break;
-                }
-            }
+            InsertEntry(username, score);
         }
 
         SaveLeaderboard();
+    }
+
+    private void InsertEntry(string username, int score)
+    {
+        // Find the correct position to insert the new entry
+        int insertIndex = -1;
+        for (int i = 0; i < names.Count; ++i)
+        {
+            if (names[i].text == "N/A" || int.Parse(scores[i].text) < score)
+            {
+                insertIndex = i;
+                break;
+            }
+        }
+
+        // If there's space for a new entry or the new score is higher than some existing scores
+        if (insertIndex >= 0)
+        {
+            // Shift entries down to make room for the new entry
+            for (int i = names.Count - 1; i > insertIndex; --i)
+            {
+                names[i].text = names[i - 1].text;
+                scores[i].text = scores[i - 1].text;
+            }
+
+            // Insert the new entry
+            names[insertIndex].text = username;
+            scores[insertIndex].text = score.ToString();
+        }
+    }
+
+    private void InitializeDefaultLeaderboard()
+    {
+        for (int i = 0; i < names.Count; ++i)
+        {
+            names[i].text = "N/A";
+            scores[i].text = "0";
+        }
     }
 }

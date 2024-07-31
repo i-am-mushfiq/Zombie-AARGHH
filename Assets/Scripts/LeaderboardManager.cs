@@ -28,7 +28,6 @@ public class LeaderboardManager : MonoBehaviour
             return;
         }
 
-        // Update the leaderboard with the new score
         if (leaderboard != null)
         {
             leaderboard.AddLeaderboardEntry(username, score);
