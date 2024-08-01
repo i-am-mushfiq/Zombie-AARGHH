@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
     public bool isFacingRight = true;
     private bool controlsEnabled = true;
     public BulletController bulletController;
-    public PlayerHealth playerHealth; 
+    public PlayerHealth playerHealth;
+
     void Awake()
     {
         Debug.Log("PlayerController Awake");
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
         playerInputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
         playerInputActions.Player.Jump.performed += ctx => Jump();
         playerInputActions.Player.Shoot.performed += ctx => Shoot();
+        playerInputActions.Player.Reload.performed += ctx => Reload();
     }
 
     void OnEnable()
@@ -85,6 +87,20 @@ public class PlayerController : MonoBehaviour
         else
         {
             Debug.LogWarning("BulletController not assigned or controls disabled!");
+        }
+    }
+
+    void Reload()
+    {
+        if (controlsEnabled)
+        {
+            Debug.Log("Reloading...");
+            // Call the reload function from AmmoManager here, implementation would be done later
+            // For example: ammoManager.Reload();
+        }
+        else
+        {
+            Debug.LogWarning("Controls disabled!");
         }
     }
 
