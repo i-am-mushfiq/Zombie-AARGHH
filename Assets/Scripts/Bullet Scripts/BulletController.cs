@@ -9,9 +9,9 @@ public class BulletController : MonoBehaviour
     public int bulletPoolSize = 30;
     public Transform spawnPoint;
     public PlayerController playerController;
+    public AmmoManager ammoManager; 
 
     private List<GameObject> bulletPool;
-    private AmmoManager ammoManager;
 
     private void Start()
     {

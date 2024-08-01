@@ -92,15 +92,13 @@ public class PlayerController : MonoBehaviour
 
     void Reload()
     {
-        if (controlsEnabled)
+        if (controlsEnabled && bulletController != null)
         {
-            Debug.Log("Reloading...");
-            // Call the reload function from AmmoManager here, implementation would be done later
-            // For example: ammoManager.Reload();
+            bulletController.ammoManager.Reload();
         }
         else
         {
-            Debug.LogWarning("Controls disabled!");
+            Debug.LogWarning("AmmoManager not assigned or controls disabled!");
         }
     }
 
