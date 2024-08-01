@@ -11,10 +11,12 @@ public class BulletController : MonoBehaviour
     public PlayerController playerController;
 
     private List<GameObject> bulletPool;
+    private AmmoManager ammoManager;
 
     private void Start()
     {
         playerController = player.GetComponent<PlayerController>();
+        ammoManager = player.GetComponent<AmmoManager>();
 
         bulletPool = new List<GameObject>();
         for (int i = 0; i < bulletPoolSize; i++)
@@ -27,16 +29,19 @@ public class BulletController : MonoBehaviour
 
     public void SpawnBullet()
     {
-        foreach (GameObject bullet in bulletPool)
+        if (ammoManager.UseAmmo())
         {
-            if (!bullet.activeInHierarchy)
+            foreach (GameObject bullet in bulletPool)
             {
-                bullet.transform.position = spawnPoint.position;
-                bullet.SetActive(true);
+                if (!bullet.activeInHierarchy)
+                {
+                    bullet.transform.position = spawnPoint.position;
+                    bullet.SetActive(true);
 
-                bullet.GetComponent<Bullet>().SetDirection(playerController.isFacingRight ? Vector2.right : Vector2.left);
+                    bullet.GetComponent<Bullet>().SetDirection(playerController.isFacingRight ? Vector2.right : Vector2.left);
 
-                break;
+                    break;
+                }
             }
         }
     }

@@ -77,25 +77,7 @@ public class Leaderboard : MonoBehaviour
     public void AddLeaderboardEntry(string username, int score)
     {
         Debug.Log($"Adding new leaderboard entry: Username = {username}, Score = {score}");
-
-        // Check if the username already exists and update the score
-        bool entryUpdated = false;
-        for (int i = 0; i < names.Count; ++i)
-        {
-            if (names[i].text == username)
-            {
-                scores[i].text = score.ToString();
-                entryUpdated = true;
-                break;
-            }
-        }
-
-        // If the username doesn't exist, insert a new entry in the correct position
-        if (!entryUpdated)
-        {
-            InsertEntry(username, score);
-        }
-
+        InsertEntry(username, score);
         SaveLeaderboard();
     }
 
