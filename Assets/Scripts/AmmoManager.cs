@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using System.Collections;
+using Cysharp.Threading.Tasks;
 
 public class AmmoManager : MonoBehaviour
 {
@@ -31,7 +31,7 @@ public class AmmoManager : MonoBehaviour
 
             if (currentAmmo == 0)
             {
-                StartCoroutine(ReloadCoroutine()); // Corrected usage
+                Reload().Forget();
             }
 
             return true;
@@ -57,22 +57,17 @@ public class AmmoManager : MonoBehaviour
         }
     }
 
-    public void Reload()
+    public async UniTaskVoid Reload()
     {
         if (!isReloading)
         {
-            StartCoroutine(ReloadCoroutine()); // Corrected usage
+            isReloading = true;
+            Debug.Log("Reloading...");
+            await UniTask.Delay((int)(reloadTime * 1000)); 
+            currentAmmo = maxAmmo;
+            UpdateAmmoUI();
+            isReloading = false;
+            Debug.Log("Reloaded.");
         }
-    }
-
-    private IEnumerator ReloadCoroutine()
-    {
-        isReloading = true;
-        Debug.Log("Reloading...");
-        yield return new WaitForSeconds(reloadTime);
-        currentAmmo = maxAmmo;
-        UpdateAmmoUI();
-        isReloading = false;
-        Debug.Log("Reloaded.");
     }
 }
