@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using Cysharp.Threading.Tasks;
+using UnityEngine.UI;
 
 public class AmmoManager : MonoBehaviour
 {
@@ -8,12 +9,18 @@ public class AmmoManager : MonoBehaviour
     public int currentAmmo;
     public TextMeshProUGUI ammoText;
     public float reloadTime = 1.5f;
+    public Slider reloadSlider;
     private bool isReloading = false;
 
     void Start()
     {
         currentAmmo = maxAmmo;
         UpdateAmmoUI();
+        if (reloadSlider != null)
+        {
+            reloadSlider.gameObject.SetActive(false);
+            reloadSlider.value = 0;
+        }
     }
 
     public bool UseAmmo()
@@ -59,15 +66,41 @@ public class AmmoManager : MonoBehaviour
 
     public async UniTaskVoid Reload()
     {
-        if (!isReloading)
+        if (!isReloading && currentAmmo < maxAmmo)
         {
             isReloading = true;
             Debug.Log("Reloading...");
-            await UniTask.Delay((int)(reloadTime * 1000)); 
+
+            if (reloadSlider != null)
+            {
+                reloadSlider.gameObject.SetActive(true);
+                reloadSlider.value = 0;
+            }
+
+            float elapsedTime = 0f;
+
+            while (elapsedTime < reloadTime)
+            {
+                elapsedTime += Time.deltaTime;
+                float progress = Mathf.Clamp01(elapsedTime / reloadTime);
+
+                if (reloadSlider != null)
+                {
+                    reloadSlider.value = progress;
+                }
+
+                await UniTask.Yield();
+            }
+
             currentAmmo = maxAmmo;
             UpdateAmmoUI();
             isReloading = false;
             Debug.Log("Reloaded.");
+
+            if (reloadSlider != null)
+            {
+                reloadSlider.gameObject.SetActive(false);
+            }
         }
     }
 }

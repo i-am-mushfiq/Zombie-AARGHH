@@ -83,7 +83,6 @@ public class Leaderboard : MonoBehaviour
 
     private void InsertEntry(string username, int score)
     {
-        // Find the correct position to insert the new entry
         int insertIndex = -1;
         for (int i = 0; i < names.Count; ++i)
         {
@@ -94,17 +93,13 @@ public class Leaderboard : MonoBehaviour
             }
         }
 
-        // If there's space for a new entry or the new score is higher than some existing scores
         if (insertIndex >= 0)
         {
-            // Shift entries down to make room for the new entry
             for (int i = names.Count - 1; i > insertIndex; --i)
             {
                 names[i].text = names[i - 1].text;
                 scores[i].text = scores[i - 1].text;
             }
-
-            // Insert the new entry
             names[insertIndex].text = username;
             scores[insertIndex].text = score.ToString();
         }
