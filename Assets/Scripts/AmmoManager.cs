@@ -56,7 +56,7 @@ public class AmmoManager : MonoBehaviour
         UpdateAmmoUI();
     }
 
-    void UpdateAmmoUI()
+    public void UpdateAmmoUI()
     {
         if (ammoText != null)
         {
