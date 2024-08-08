@@ -14,10 +14,13 @@ public class PlayerController : MonoBehaviour
     private bool controlsEnabled = true;
     public BulletController bulletController;
     public PlayerHealth playerHealth;
+    private bool isGrounded = true;
+    public LayerMask groundLayer;
+    public Transform groundCheck;
+    public float groundCheckRadius = 0.2f;
 
     void Awake()
     {
-        Debug.Log("PlayerController Awake");
         playerInputActions = new PlayerInputActions();
         rb = GetComponent<Rigidbody2D>();
 
@@ -44,6 +47,9 @@ public class PlayerController : MonoBehaviour
         {
             Move();
         }
+
+        // Check if the player is grounded
+        //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
 
     void Move()
@@ -71,10 +77,11 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
+        //if (controlsEnabled && isGrounded)
         if (controlsEnabled)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            Debug.Log("Jumping with force: " + jumpForce);
+            //isGrounded = false;
         }
     }
 
@@ -110,12 +117,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if (controlsEnabled && other.CompareTag("Enemy"))
+        if (controlsEnabled && other.collider.CompareTag("Enemy"))
         {
             other.gameObject.SetActive(false);
             TakeDamage();
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.collider.CompareTag("Ground"))
+        {
+            isGrounded = false; // Reset isGrounded when leaving the ground
         }
     }
 

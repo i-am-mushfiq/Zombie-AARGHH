@@ -9,8 +9,16 @@ public class LeaderboardManager : MonoBehaviour
     [SerializeField]
     private Leaderboard leaderboard;
 
+    private bool hasSubmitted = false;
+
     public void SubmitScore()
     {
+        if (hasSubmitted)
+        {
+            Debug.LogWarning("Score has already been submitted for this game instance.");
+            return;
+        }
+
         string username = inputName.text;
         int score = ScoreManager.Instance.GetScore();
 
@@ -32,6 +40,7 @@ public class LeaderboardManager : MonoBehaviour
         {
             leaderboard.AddLeaderboardEntry(username, score);
             Debug.Log("Leaderboard updated with new entry.");
+            hasSubmitted = true;
         }
         else
         {
