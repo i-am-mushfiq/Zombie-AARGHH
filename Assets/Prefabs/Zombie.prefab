@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 8996427895452545498}
   - component: {fileID: 2899765892635589349}
   - component: {fileID: 2522796562832975554}
-  - component: {fileID: 2988355330972153637}
+  - component: {fileID: 7443414130307166743}
   m_Layer: 3
   m_Name: Zombie
   m_TagString: Enemy
@@ -483,7 +483,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2988355330972153637
+--- !u!114 &7443414130307166743
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -492,7 +492,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8583147376071388912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3d223432a8a774e92e11e0d3152729, type: 3}
+  m_Script: {fileID: 11500000, guid: c620a97b665522b47b8f81dfa4884198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minSpeed: 2
@@ -504,5 +504,6 @@ MonoBehaviour:
     m_Bits: 0
   groundCheckDistance: 1
   animator: {fileID: 2522796562832975554}
+  fadeOutTime: 3
   hitPoints: 1
   healthBarFull: {fileID: 856470754745870554}

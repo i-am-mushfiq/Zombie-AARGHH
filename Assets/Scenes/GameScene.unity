@@ -1147,7 +1147,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 446808319}
   playerController: {fileID: 573425524}
   ammoManager: {fileID: 573425530}
-  muzzleHandler: {fileID: 1255104362}
+  muzzleHandler: {fileID: 1255104363}
 --- !u!1 &516540606
 GameObject:
   m_ObjectHideFlags: 0
@@ -3005,14 +3005,14 @@ GameObject:
   - component: {fileID: 1255104361}
   - component: {fileID: 1255104360}
   - component: {fileID: 1255104359}
-  - component: {fileID: 1255104362}
+  - component: {fileID: 1255104363}
   m_Layer: 0
   m_Name: ef_1_00000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1255104359
 Animator:
   serializedVersion: 5
@@ -3101,7 +3101,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1026933226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1255104362
+--- !u!114 &1255104363
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3110,7 +3110,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1255104358}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26d410becba4e9f46bf1d0fc876dbc38, type: 3}
+  m_Script: {fileID: 11500000, guid: 50cc7777f46cdff4f8e8bcb54cdf293a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1255104359}
