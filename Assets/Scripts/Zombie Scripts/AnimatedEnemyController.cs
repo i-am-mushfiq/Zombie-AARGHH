@@ -11,6 +11,9 @@ public class AnimatedEnemyController : MonoBehaviour
     private Transform playerTransform;
     private bool isFacingRight = true;
 
+    public ParticleSystem impactParticleSystem; // Shared particle system for damage and death
+
+
     public HealthBar healthBarScript;
     public LayerMask groundLayer;
     public float groundCheckDistance = 1f;
@@ -117,6 +120,11 @@ public class AnimatedEnemyController : MonoBehaviour
         Debug.Log("invoked");
         if (isDead) return;
 
+        if (impactParticleSystem != null)
+        {
+            impactParticleSystem.Play();
+        }
+
         StopMovement();
         animator.SetBool("takeDamage", true);
         Debug.Log("take damage finished");
@@ -140,6 +148,11 @@ public class AnimatedEnemyController : MonoBehaviour
         ScoreManager.Instance.AddPoints(hitPoints);
         gameObject.tag = "DeadEnemy";
         animator.SetTrigger("death");
+
+        if (impactParticleSystem != null)
+        {
+            impactParticleSystem.Play();
+        }
 
         if (healthBarFull != null)
         {

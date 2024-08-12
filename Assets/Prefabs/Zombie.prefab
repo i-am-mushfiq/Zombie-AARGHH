@@ -5328,6 +5328,7 @@ MonoBehaviour:
   minSpeed: 2
   maxSpeed: 5
   invertDirection: 0
+  impactParticleSystem: {fileID: 2532414502877171141}
   healthBarScript: {fileID: 2899765892635589349}
   groundLayer:
     serializedVersion: 2
