@@ -9,7 +9,8 @@ public class BulletController : MonoBehaviour
     public int bulletPoolSize = 30;
     public Transform spawnPoint;
     public PlayerController playerController;
-    public AmmoManager ammoManager; 
+    public AmmoManager ammoManager;
+    public MuzzleHandler muzzleHandler;
 
     private List<GameObject> bulletPool;
 
@@ -29,6 +30,7 @@ public class BulletController : MonoBehaviour
 
     public void SpawnBullet()
     {
+        
         if (ammoManager.UseAmmo())
         {
             foreach (GameObject bullet in bulletPool)
@@ -39,7 +41,11 @@ public class BulletController : MonoBehaviour
                     bullet.SetActive(true);
 
                     bullet.GetComponent<Bullet>().SetDirection(playerController.isFacingRight ? Vector2.right : Vector2.left);
-
+                    if (muzzleHandler != null)
+                    {
+                        muzzleHandler.gameObject.SetActive(true);
+                        muzzleHandler.PlayAnimationAndDeactivate();
+                    }
                     break;
                 }
             }
