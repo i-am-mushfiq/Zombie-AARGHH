@@ -21,8 +21,8 @@ public class AnimatedEnemyController : MonoBehaviour
     [SerializeField]
     private int hitPoints = 1;
 
-    private bool isDead = false; 
-
+    private bool isDead = false;
+    private bool isMovementStopped = false;
 
     public GameObject healthBarFull;
 
@@ -49,12 +49,13 @@ public class AnimatedEnemyController : MonoBehaviour
         if (healthBarScript != null)
         {
             healthBarScript.OnHealthDepleted += Death;
+            healthBarScript.OnHealthDamaged += TakeDamage;
         }
     }
 
     private void FixedUpdate()
     {
-        if (isDead) return;
+        if (isDead || isMovementStopped) return;
 
         bool wasMoving = animator.GetBool("isWalking");
 
@@ -103,15 +104,34 @@ public class AnimatedEnemyController : MonoBehaviour
         transform.localScale = theScale;
     }
 
-    public void TakeDamage(int damage)
+    public void OnZombieHurtCompleted()
     {
+        Debug.Log("in 'OnZombieHurtCompleted'");
+        animator.SetBool("takeDamage", false);
+        RestartMovement();
+        animator.SetBool("isWalking", true);
+    }
+
+    public void TakeDamage()
+    {
+        Debug.Log("invoked");
         if (isDead) return;
 
-        if (healthBarScript != null)
-        {
-            animator.SetTrigger("takeDamage");
-            healthBarScript.TakeDamage();
-        }
+        StopMovement();
+        animator.SetBool("takeDamage", true);
+        Debug.Log("take damage finished");
+    }
+
+    private void StopMovement()
+    {
+        isMovementStopped = true;
+        rb.velocity = Vector2.zero;  // Stop any existing velocity
+        animator.SetBool("isWalking", false);  // Stop walking animation
+    }
+
+    private void RestartMovement()
+    {
+        isMovementStopped = false;  // Allow movement again
     }
 
     private void Death()
@@ -137,7 +157,7 @@ public class AnimatedEnemyController : MonoBehaviour
             }
         }
 
-        StartCoroutine(FadeOutSprite(fadeOutTime)); 
+        StartCoroutine(FadeOutSprite(fadeOutTime));
     }
 
     private IEnumerator FadeOutSprite(float duration)
@@ -162,7 +182,7 @@ public class AnimatedEnemyController : MonoBehaviour
 
             if (gameObject.tag != "Player")
             {
-                Debug.Log("OnDeathAnimationComplete: Adding points to ScoreManager."); 
+                Debug.Log("OnDeathAnimationComplete: Adding points to ScoreManager.");
             }
         }
     }

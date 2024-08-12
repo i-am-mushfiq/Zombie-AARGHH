@@ -10,6 +10,9 @@ public class HealthBar : MonoBehaviour
     public delegate void HealthDepleted();
     public event HealthDepleted OnHealthDepleted;
 
+    public delegate void HealthDamaged();
+    public event HealthDamaged OnHealthDamaged;
+
     public void Start()
     {
         health = totalHealth;
@@ -18,6 +21,9 @@ public class HealthBar : MonoBehaviour
     public void TakeDamage()
     {
         health--;
+
+        OnHealthDamaged?.Invoke();
+        //Debug.Log("invoke called");
 
         if (health <= 0)
         {
