@@ -296,9 +296,10 @@ GameObject:
   - component: {fileID: 5317242096277143969}
   - component: {fileID: 2441800843100669455}
   - component: {fileID: 7316577117203969606}
-  - component: {fileID: 3732375310190560345}
   - component: {fileID: 8996427895452545498}
   - component: {fileID: 2899765892635589349}
+  - component: {fileID: 2522796562832975554}
+  - component: {fileID: 2988355330972153637}
   m_Layer: 3
   m_Name: Zombie
   m_TagString: Enemy
@@ -420,26 +421,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.1159694, y: 4.238294}
   m_EdgeRadius: 0
---- !u!114 &3732375310190560345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8583147376071388912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a9c6afe24d82f64a9c1218b0678cdd9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minSpeed: 3
-  maxSpeed: 7
-  invertDirection: 0
-  healthBarScript: {fileID: 2899765892635589349}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  groundCheckDistance: 1
 --- !u!50 &8996427895452545498
 Rigidbody2D:
   serializedVersion: 4
@@ -481,6 +462,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 6018926139200737011}
   totalHealth: 2
-  hitPoints: 5
-  particleSystemPool: {fileID: 2871221722276378733, guid: f85ef5f068a8d584ca7e7560155321c7, type: 3}
-  particleSystemController: {fileID: 4628060528605917882, guid: f85ef5f068a8d584ca7e7560155321c7, type: 3}
+--- !u!95 &2522796562832975554
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8583147376071388912}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2cfaf7902dd1a2548aff6c5e1c2ef840, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2988355330972153637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8583147376071388912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3d223432a8a774e92e11e0d3152729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSpeed: 2
+  maxSpeed: 5
+  invertDirection: 0
+  healthBarScript: {fileID: 2899765892635589349}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  groundCheckDistance: 1
+  animator: {fileID: 2522796562832975554}
+  hitPoints: 1
+  healthBarFull: {fileID: 856470754745870554}

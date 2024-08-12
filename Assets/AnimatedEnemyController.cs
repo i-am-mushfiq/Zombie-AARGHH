@@ -1,6 +1,7 @@
 using UnityEngine;
+using System.Collections;
 
-public class EnemyController : MonoBehaviour
+public class AnimatedEnemyController : MonoBehaviour
 {
     public float minSpeed = 2f;
     public float maxSpeed = 5f;
@@ -11,16 +12,24 @@ public class EnemyController : MonoBehaviour
     private bool isFacingRight = true;
 
     public HealthBar healthBarScript;
-
     public LayerMask groundLayer;
     public float groundCheckDistance = 1f;
+    public Animator animator;
+
+    public float fadeOutTime = 3f;
 
     [SerializeField]
     private int hitPoints = 1;
 
+    private bool isDead = false; 
+
+
+    public GameObject healthBarFull;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
@@ -45,12 +54,19 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isDead) return;
+
+        bool wasMoving = animator.GetBool("isWalking");
+
         if (playerTransform != null)
         {
             Vector2 direction = (playerTransform.position - transform.position).normalized;
 
             Vector2 movement = new Vector2(direction.x, 0) * moveSpeed * Time.fixedDeltaTime;
             rb.MovePosition(rb.position + movement);
+
+            bool isWalking = movement.x != 0;
+            animator.SetBool("isWalking", isWalking);
 
             if (movement.x > 0 && !isFacingRight)
             {
@@ -60,6 +76,10 @@ public class EnemyController : MonoBehaviour
             {
                 Flip();
             }
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
         }
 
         StayGrounded();
@@ -85,18 +105,65 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (isDead) return;
+
         if (healthBarScript != null)
         {
+            animator.SetTrigger("takeDamage");
             healthBarScript.TakeDamage();
         }
     }
 
     private void Death()
     {
-        gameObject.SetActive(false);
-        if (gameObject.tag != "Player")
+        isDead = true;
+        ScoreManager.Instance.AddPoints(hitPoints);
+        gameObject.tag = "DeadEnemy";
+        animator.SetTrigger("death");
+
+        if (healthBarFull != null)
         {
-            ScoreManager.Instance.AddPoints(hitPoints);
+            healthBarFull.SetActive(false);
+        }
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            Collider2D playerCollider = player.GetComponent<Collider2D>();
+            Collider2D enemyCollider = GetComponent<Collider2D>();
+            if (playerCollider != null && enemyCollider != null)
+            {
+                Physics2D.IgnoreCollision(playerCollider, enemyCollider, true);
+            }
+        }
+
+        StartCoroutine(FadeOutSprite(fadeOutTime)); 
+    }
+
+    private IEnumerator FadeOutSprite(float duration)
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            Color startColor = spriteRenderer.color;
+            Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0f);
+            float elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                spriteRenderer.color = Color.Lerp(startColor, endColor, elapsedTime / duration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            spriteRenderer.color = endColor;
+
+            gameObject.SetActive(false);
+
+            if (gameObject.tag != "Player")
+            {
+                Debug.Log("OnDeathAnimationComplete: Adding points to ScoreManager."); 
+            }
         }
     }
 }

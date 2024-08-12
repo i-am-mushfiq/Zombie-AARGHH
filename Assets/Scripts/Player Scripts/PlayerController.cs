@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.collider.CompareTag("Ground"))
         {
-            isGrounded = false; // Reset isGrounded when leaving the ground
+            isGrounded = false;
         }
     }
 

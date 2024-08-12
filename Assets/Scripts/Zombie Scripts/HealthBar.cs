@@ -6,8 +6,9 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     private int totalHealth = 5;
     private int health = 5;
-    [SerializeField]
-    private int hitPoints = 1;
+
+    public delegate void HealthDepleted();
+    public event HealthDepleted OnHealthDepleted;
 
     public void Start()
     {
@@ -17,25 +18,14 @@ public class HealthBar : MonoBehaviour
     public void TakeDamage()
     {
         health--;
-        //Debug.Log("Health: " + health);
 
         if (health <= 0)
         {
-            Death();
+            OnHealthDepleted?.Invoke();
         }
 
         float healthRatio = (float)health / (float)totalHealth;
-        //Debug.Log("Health Ratio: " + healthRatio);
         healthBar.localScale = new Vector3(healthRatio, healthBar.localScale.y, healthBar.localScale.z);
-    }
-
-    void Death()
-    {
-        gameObject.SetActive(false);
-        if (gameObject.tag != "player")
-        {
-            ScoreManager.Instance.AddPoints(hitPoints);
-        }
     }
 
     public void ResetHealth()
