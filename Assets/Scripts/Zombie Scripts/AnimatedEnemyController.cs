@@ -34,13 +34,13 @@ public class AnimatedEnemyController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-
+        
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             playerTransform = player.transform;
         }
-
+        magazineSpawner = player.GetComponent<MagazineSpawner>();
         moveSpeed = UnityEngine.Random.Range(minSpeed, maxSpeed);
 
         if (invertDirection)
@@ -169,7 +169,6 @@ public class AnimatedEnemyController : MonoBehaviour
             }
         }
 
-        // Call the method and pass the position of the zombie
         magazineSpawner.HandleMagazineSpawning(transform.position);
 
         StartCoroutine(FadeOutSprite(fadeOutTime));

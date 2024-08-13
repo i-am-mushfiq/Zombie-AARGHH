@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MagazineSpawner : MonoBehaviour
 {
-    public MagazinePool magazinePool;
+    public MagazineHandler magazinePool;
 
     public void HandleMagazineSpawning(Vector3 enemyPosition)
     {
@@ -10,13 +10,13 @@ public class MagazineSpawner : MonoBehaviour
         GameObject magazine = magazinePool.GetPooledMagazine();
         if (magazine != null)
         {
-            Debug.Log("Magazine not null");
+            //Debug.Log("Magazine not null");
             magazine.transform.position = enemyPosition;
             magazine.SetActive(true);
         }
         else
         {
-            //Debug.Log("Magazine null");
+            Debug.Log("Magazine null");
         }
     }
 }

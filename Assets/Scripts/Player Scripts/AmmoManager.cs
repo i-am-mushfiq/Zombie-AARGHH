@@ -43,6 +43,7 @@ public class AmmoManager : MonoBehaviour
 
     public bool UseAmmo()
     {
+        Debug.Log(currentMagazines);
         if (isReloading)
         {
             Debug.Log("Reloading...");
