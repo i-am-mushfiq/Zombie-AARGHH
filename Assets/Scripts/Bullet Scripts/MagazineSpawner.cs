@@ -4,24 +4,19 @@ public class MagazineSpawner : MonoBehaviour
 {
     public MagazinePool magazinePool;
 
-    private void Start()
+    public void HandleMagazineSpawning(Vector3 enemyPosition)
     {
-
-    }
-
-    private void HandleEnemyDeath(Transform enemyTransform)
-    {
-        Debug.Log("Inside HandleEnemyDeath");
+        
         GameObject magazine = magazinePool.GetPooledMagazine();
         if (magazine != null)
         {
-            magazine.transform.position = enemyTransform.position;
+            Debug.Log("Magazine not null");
+            magazine.transform.position = enemyPosition;
             magazine.SetActive(true);
         }
-    }
-
-    public void handleMagazineSpawning()
-    {
-        Debug.Log("in handleMagazineSpawning");
+        else
+        {
+            //Debug.Log("Magazine null");
+        }
     }
 }

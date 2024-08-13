@@ -11,7 +11,6 @@ public class AmmoManager : MonoBehaviour
     public int maxMagazines = 3;
     public int currentMagazines;
     public TextMeshProUGUI ammoText;
-    public TextMeshProUGUI magazineText;
     public float reloadTime = 1.5f;
     public Slider reloadSlider;
     public List<GameObject> magazineUIElements; 
@@ -91,10 +90,6 @@ public class AmmoManager : MonoBehaviour
 
     public void UpdateMagazineUI()
     {
-        if (magazineText != null)
-        {
-            magazineText.text = "Magazines: " + currentMagazines;
-        }
 
         for (int i = 0; i < magazineUIElements.Count; i++)
         {

@@ -1,44 +1,39 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class MagazinePool : MonoBehaviour
 {
     public GameObject magazinePrefab;
-    public int poolSize = 10;
+    public int initialPoolSize = 10;
 
-    private List<GameObject> magazinePool;
-
-    void Start()
+    private void Start()
     {
-        InitializePool();
-    }
-
-    void InitializePool()
-    {
-        magazinePool = new List<GameObject>();
-
-        for (int i = 0; i < poolSize; i++)
+        if (magazinePrefab == null)
         {
-            GameObject magazine = Instantiate(magazinePrefab);
-            magazine.SetActive(false);
-            magazinePool.Add(magazine);
+            Debug.LogError("Magazine Prefab is not assigned in the Inspector.");
         }
     }
-
     public GameObject GetPooledMagazine()
     {
-        foreach (GameObject magazine in magazinePool)
+        if (magazinePrefab == null)
         {
-            if (!magazine.activeInHierarchy)
-            {
-                return magazine;
-            }
+            Debug.LogError("Magazine Prefab is not assigned.");
+            return null;
         }
-        return null;
+
+        Vector3 spawnPosition = new Vector3(100, 100, 0);
+        GameObject magazine = Instantiate(magazinePrefab, spawnPosition, Quaternion.identity);
+        return magazine;
     }
 
-    public void ReturnMagazineToPool(GameObject magazine)
+    public void DestroyMagazine(GameObject magazine)
     {
-        magazine.SetActive(false);
+        if (magazine != null)
+        {
+            Destroy(magazine);
+        }
+        else
+        {
+            Debug.LogWarning("Attempted to destroy a null magazine.");
+        }
     }
 }

@@ -108,7 +108,7 @@ public class AnimatedEnemyController : MonoBehaviour
 
     public void OnZombieHurtCompleted()
     {
-        Debug.Log("in 'OnZombieHurtCompleted'");
+        //Debug.Log("in 'OnZombieHurtCompleted'");
         animator.SetBool("takeDamage", false);
         RestartMovement();
         animator.SetBool("isWalking", true);
@@ -116,7 +116,7 @@ public class AnimatedEnemyController : MonoBehaviour
 
     public void TakeDamage()
     {
-        Debug.Log("invoked");
+        //Debug.Log("invoked");
         if (isDead) return;
 
         if (impactParticleSystem != null)
@@ -126,7 +126,7 @@ public class AnimatedEnemyController : MonoBehaviour
 
         StopMovement();
         animator.SetBool("takeDamage", true);
-        Debug.Log("take damage finished");
+        //Debug.Log("take damage finished");
     }
 
     private void StopMovement()
@@ -169,7 +169,8 @@ public class AnimatedEnemyController : MonoBehaviour
             }
         }
 
-        magazineSpawner.handleMagazineSpawning();
+        // Call the method and pass the position of the zombie
+        magazineSpawner.HandleMagazineSpawning(transform.position);
 
         StartCoroutine(FadeOutSprite(fadeOutTime));
     }
@@ -196,7 +197,7 @@ public class AnimatedEnemyController : MonoBehaviour
 
             if (gameObject.tag != "Player")
             {
-                Debug.Log("OnDeathAnimationComplete: Adding points to ScoreManager.");
+                //Debug.Log("OnDeathAnimationComplete: Adding points to ScoreManager.");
             }
         }
     }

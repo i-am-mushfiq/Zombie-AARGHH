@@ -2669,10 +2669,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7443414130307166743, guid: 97b802e9a58934f48899749049f9a9d6, type: 3}
-      propertyPath: magazineSpawner
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8583147376071388912, guid: 97b802e9a58934f48899749049f9a9d6, type: 3}
       propertyPath: m_Name
       value: Zombie
