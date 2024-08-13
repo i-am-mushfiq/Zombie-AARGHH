@@ -14,7 +14,7 @@ public class AmmoManager : MonoBehaviour
     public TextMeshProUGUI magazineText;
     public float reloadTime = 1.5f;
     public Slider reloadSlider;
-    public List<GameObject> magazineUIElements; // List of UI elements for magazines
+    public List<GameObject> magazineUIElements; 
 
     private bool isReloading = false;
 
@@ -25,7 +25,6 @@ public class AmmoManager : MonoBehaviour
         UpdateAmmoUI();
         UpdateMagazineUI();
 
-        // Ensure magazine UI elements are inactive by default
         for (int i = 0; i < magazineUIElements.Count; i++)
         {
             if (magazineUIElements[i] != null)
@@ -97,7 +96,6 @@ public class AmmoManager : MonoBehaviour
             magazineText.text = "Magazines: " + currentMagazines;
         }
 
-        // Update magazine UI elements based on the current number of magazines
         for (int i = 0; i < magazineUIElements.Count; i++)
         {
             if (magazineUIElements[i] != null)

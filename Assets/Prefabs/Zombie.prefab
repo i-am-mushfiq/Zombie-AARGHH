@@ -5309,5 +5309,6 @@ MonoBehaviour:
   groundCheckDistance: 1
   animator: {fileID: 2522796562832975554}
   fadeOutTime: 3
+  magazineSpawner: {fileID: 5739484093225157285, guid: 085cada1f0c072e45911f317734bc6ab, type: 3}
   hitPoints: 1
   healthBarFull: {fileID: 856470754745870554}

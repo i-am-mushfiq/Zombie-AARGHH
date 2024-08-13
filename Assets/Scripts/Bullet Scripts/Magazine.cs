@@ -13,9 +13,5 @@ public class Magazine : MonoBehaviour
             }
             gameObject.SetActive(false);
         }
-        else if (other.CompareTag("Destroyer"))
-        {
-            gameObject.SetActive(false);
-        }
     }
 }

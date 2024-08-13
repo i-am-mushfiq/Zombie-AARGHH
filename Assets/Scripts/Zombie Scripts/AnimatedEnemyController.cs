@@ -13,13 +13,14 @@ public class AnimatedEnemyController : MonoBehaviour
 
     public ParticleSystem impactParticleSystem; // Shared particle system for damage and death
 
-
     public HealthBar healthBarScript;
     public LayerMask groundLayer;
     public float groundCheckDistance = 1f;
     public Animator animator;
 
     public float fadeOutTime = 3f;
+
+    public MagazineSpawner magazineSpawner;
 
     [SerializeField]
     private int hitPoints = 1;
@@ -40,7 +41,7 @@ public class AnimatedEnemyController : MonoBehaviour
             playerTransform = player.transform;
         }
 
-        moveSpeed = Random.Range(minSpeed, maxSpeed);
+        moveSpeed = UnityEngine.Random.Range(minSpeed, maxSpeed);
 
         if (invertDirection)
         {
@@ -65,7 +66,6 @@ public class AnimatedEnemyController : MonoBehaviour
         if (playerTransform != null)
         {
             Vector2 direction = (playerTransform.position - transform.position).normalized;
-
             Vector2 movement = new Vector2(direction.x, 0) * moveSpeed * Time.fixedDeltaTime;
             rb.MovePosition(rb.position + movement);
 
@@ -101,7 +101,6 @@ public class AnimatedEnemyController : MonoBehaviour
     private void Flip()
     {
         isFacingRight = !isFacingRight;
-
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
@@ -133,13 +132,13 @@ public class AnimatedEnemyController : MonoBehaviour
     private void StopMovement()
     {
         isMovementStopped = true;
-        rb.velocity = Vector2.zero;  // Stop any existing velocity
-        animator.SetBool("isWalking", false);  // Stop walking animation
+        rb.velocity = Vector2.zero;
+        animator.SetBool("isWalking", false);
     }
 
     private void RestartMovement()
     {
-        isMovementStopped = false;  // Allow movement again
+        isMovementStopped = false;
     }
 
     private void Death()
@@ -169,6 +168,8 @@ public class AnimatedEnemyController : MonoBehaviour
                 Physics2D.IgnoreCollision(playerCollider, enemyCollider, true);
             }
         }
+
+        magazineSpawner.handleMagazineSpawning();
 
         StartCoroutine(FadeOutSprite(fadeOutTime));
     }
