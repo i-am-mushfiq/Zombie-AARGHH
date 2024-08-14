@@ -14,13 +14,14 @@ public class PlayerController : MonoBehaviour
     private bool controlsEnabled = true;
     public BulletController bulletController;
     public PlayerHealth playerHealth;
-    private bool isGrounded = true;
+    //private bool isGrounded = true;
     public LayerMask groundLayer;
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
 
     void Awake()
     {
+        controlsEnabled = true;
         playerInputActions = new PlayerInputActions();
         rb = GetComponent<Rigidbody2D>();
 
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
     void OnEnable()
     {
         playerInputActions.Enable();
+        controlsEnabled = true;
     }
 
     void OnDisable()
@@ -130,7 +132,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.collider.CompareTag("Ground"))
         {
-            isGrounded = false;
+            //isGrounded = false;
         }
     }
 

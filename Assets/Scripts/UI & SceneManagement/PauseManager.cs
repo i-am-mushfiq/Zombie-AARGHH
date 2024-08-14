@@ -6,7 +6,7 @@ public class PauseManager : MonoBehaviour
     public GameObject pauseMenu;
     private bool isGamePaused = false;
     private PlayerInputActions playerInputActions;
-    public static PauseManager Instance; 
+    public static PauseManager Instance;
 
     public delegate void PauseStateChanged(bool isPaused);
     public event PauseStateChanged onPauseStateChanged;
@@ -68,7 +68,6 @@ public class PauseManager : MonoBehaviour
 
     public void ContinueGame()
     {
-        
         Time.timeScale = 1;
         isGamePaused = false;
 
@@ -81,5 +80,17 @@ public class PauseManager : MonoBehaviour
             playerController.EnableControls();
         }
         pauseMenu.SetActive(false);
+    }
+
+    public void toMainMenu()
+    {
+        ContinueGame();
+        SceneChanger.Instance.SwitchToScene("MainMenu");
+    }
+
+    public void exitGame()
+    {
+        ContinueGame();
+        SceneChanger.Instance.QuitGame();
     }
 }
