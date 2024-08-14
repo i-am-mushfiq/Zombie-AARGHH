@@ -202,4 +202,39 @@ public class AnimatedEnemyController : MonoBehaviour
             }
         }
     }
+
+    public void OnEnable()
+    {
+        // Set the tag to "Enemy"
+        gameObject.tag = "Enemy";
+
+        isDead = false;
+        isMovementStopped = false;
+        hitPoints = 1;
+
+        animator.SetBool("isWalking", true);
+        animator.SetBool("takeDamage", false);
+
+        if (impactParticleSystem != null)
+        {
+            impactParticleSystem.Stop();
+        }
+
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            Color color = spriteRenderer.color;
+            color.a = 1f;
+            spriteRenderer.color = color;
+        }
+
+        gameObject.SetActive(true);
+
+        if (healthBarFull != null)
+        {
+            healthBarFull.SetActive(true);
+        }
+    }
+
+
 }
