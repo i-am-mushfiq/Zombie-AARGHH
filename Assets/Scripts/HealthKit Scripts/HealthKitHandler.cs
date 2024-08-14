@@ -9,6 +9,7 @@ public class HealthKitHandler : MonoBehaviour
 
     public GameObject healthKitPrefab;
     public int poolSize = 10;
+    private float dropChance = 1f / 16f;
 
     private IObjectPool<GameObject> healthKitPool;
 
@@ -56,11 +57,20 @@ public class HealthKitHandler : MonoBehaviour
         Destroy(healthKit);
     }
 
+    private bool ShouldDropHealthKit()
+    {
+        float randomValue = Random.value;
+        Debug.Log("Random Value is " + randomValue);
+        return randomValue < dropChance;
+    }
+
     public void SpawnHealthKit(Vector3 spawnPosition)
     {
-        GameObject healthKit = healthKitPool.Get();
-
-        healthKit.transform.position = spawnPosition;
+        if(ShouldDropHealthKit())
+        {
+            GameObject healthKit = healthKitPool.Get();
+            healthKit.transform.position = spawnPosition;
+        }   
     }
 
     public void ReleaseHealthKit(GameObject healthKit)
