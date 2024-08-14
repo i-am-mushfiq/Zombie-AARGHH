@@ -11,7 +11,7 @@ public class AnimatedEnemyController : MonoBehaviour
     private Transform playerTransform;
     private bool isFacingRight = true;
 
-    public ParticleSystem impactParticleSystem; 
+    public ParticleSystem impactParticleSystem;
 
     public HealthBar healthBarScript;
     public LayerMask groundLayer;
@@ -19,7 +19,6 @@ public class AnimatedEnemyController : MonoBehaviour
     public Animator animator;
 
     public float fadeOutTime = 3f;
-
 
     [SerializeField]
     private int hitPoints = 1;
@@ -33,7 +32,7 @@ public class AnimatedEnemyController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        
+
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
@@ -57,7 +56,7 @@ public class AnimatedEnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDead || isMovementStopped) return;
+        if (isDead || isMovementStopped || GameManager.Instance.isPaused) return;
 
         bool wasMoving = animator.GetBool("isWalking");
 
@@ -106,7 +105,6 @@ public class AnimatedEnemyController : MonoBehaviour
 
     public void OnZombieHurtCompleted()
     {
-        //Debug.Log("in 'OnZombieHurtCompleted'");
         animator.SetBool("takeDamage", false);
         RestartMovement();
         animator.SetBool("isWalking", true);
@@ -114,7 +112,6 @@ public class AnimatedEnemyController : MonoBehaviour
 
     public void TakeDamage()
     {
-        //Debug.Log("invoked");
         if (isDead) return;
 
         if (impactParticleSystem != null)
@@ -124,7 +121,6 @@ public class AnimatedEnemyController : MonoBehaviour
 
         StopMovement();
         animator.SetBool("takeDamage", true);
-        //Debug.Log("take damage finished");
     }
 
     private void StopMovement()
@@ -170,8 +166,6 @@ public class AnimatedEnemyController : MonoBehaviour
         MagazineSpawner.Instance.HandleMagazineSpawning(transform.position);
 
         StartCoroutine(FadeOutSprite(fadeOutTime));
-
-        
     }
 
     private IEnumerator FadeOutSprite(float duration)
@@ -235,6 +229,4 @@ public class AnimatedEnemyController : MonoBehaviour
             healthBarFull.SetActive(true);
         }
     }
-
-
 }

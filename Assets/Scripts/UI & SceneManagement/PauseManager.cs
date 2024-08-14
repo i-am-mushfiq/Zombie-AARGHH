@@ -68,7 +68,7 @@ public class PauseManager : MonoBehaviour
 
     public void ContinueGame()
     {
-        pauseMenu.SetActive(false);
+        
         Time.timeScale = 1;
         isGamePaused = false;
 
@@ -80,5 +80,6 @@ public class PauseManager : MonoBehaviour
         {
             playerController.EnableControls();
         }
+        pauseMenu.SetActive(false);
     }
 }
