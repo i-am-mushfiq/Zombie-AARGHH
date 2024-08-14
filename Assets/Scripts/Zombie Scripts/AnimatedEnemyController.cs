@@ -164,6 +164,7 @@ public class AnimatedEnemyController : MonoBehaviour
         }
 
         MagazineSpawner.Instance.HandleMagazineSpawning(transform.position);
+        HealthKitHandler.Instance.SpawnHealthKit(transform.position);
 
         StartCoroutine(FadeOutSprite(fadeOutTime));
     }

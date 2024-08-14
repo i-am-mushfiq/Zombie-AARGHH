@@ -14,11 +14,11 @@ public class HealthKit : MonoBehaviour
                 playerHealth.addHealth(healthAmount);
             }
 
-            Destroy(gameObject);
+            HealthKitHandler.Instance.ReleaseHealthKit(gameObject);
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            Destroy(gameObject);
+            HealthKitHandler.Instance.ReleaseHealthKit(gameObject);
         }
     }
 }
