@@ -47,7 +47,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(controlsEnabled);
         if (controlsEnabled)
         {
             Move();

@@ -62,4 +62,17 @@ public class PlayerHealth : MonoBehaviour
             Debug.LogError("GameOver UI is not assigned in the Inspector.");
         }
     }
+
+    public void addHealth(int additionalHealth)
+    {
+        health += additionalHealth;
+
+        if (health > totalHealth)
+        {
+            health = totalHealth;
+        }
+
+        float healthRatio = (float)health / (float)totalHealth;
+        healthBar.localScale = new Vector3(healthRatio, healthBar.localScale.y, healthBar.localScale.z);
+    }
 }
