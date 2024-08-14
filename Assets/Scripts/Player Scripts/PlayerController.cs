@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
         playerInputActions.Player.Jump.performed += ctx => Jump();
         playerInputActions.Player.Shoot.performed += ctx => Shoot();
         playerInputActions.Player.Reload.performed += ctx => Reload();
+
+        
     }
 
     void OnEnable()
@@ -45,11 +47,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(controlsEnabled);
         if (controlsEnabled)
         {
             Move();
         }
-
         // Check if the player is grounded
         //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
