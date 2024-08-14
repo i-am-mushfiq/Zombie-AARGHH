@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6970477721031045327}
   - component: {fileID: 242665949372901611}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: gold-bullet-illustrator-vector-graphics-Hkkciw (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 3017261030850356982}
   - component: {fileID: 2124218402670257499}
   - component: {fileID: 2754088673152364137}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,7 +220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2546660825576806710}
   - component: {fileID: 7081521520768027502}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: gold-bullet-illustrator-vector-graphics-Hkkciw (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4255286834759909114}
   - component: {fileID: 4179477679018796312}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: gold-bullet-illustrator-vector-graphics-Hkkciw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,7 +396,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8546772959815121239}
   - component: {fileID: 6060093187814794338}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: gold-bullet-illustrator-vector-graphics-Hkkciw (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ public class AnimatedEnemyController : MonoBehaviour
     private Transform playerTransform;
     private bool isFacingRight = true;
 
-    public ParticleSystem impactParticleSystem; // Shared particle system for damage and death
+    public ParticleSystem impactParticleSystem; 
 
     public HealthBar healthBarScript;
     public LayerMask groundLayer;
@@ -20,7 +20,6 @@ public class AnimatedEnemyController : MonoBehaviour
 
     public float fadeOutTime = 3f;
 
-    public MagazineSpawner magazineSpawner;
 
     [SerializeField]
     private int hitPoints = 1;
@@ -40,7 +39,6 @@ public class AnimatedEnemyController : MonoBehaviour
         {
             playerTransform = player.transform;
         }
-        magazineSpawner = player.GetComponent<MagazineSpawner>();
         moveSpeed = UnityEngine.Random.Range(minSpeed, maxSpeed);
 
         if (invertDirection)
@@ -169,9 +167,11 @@ public class AnimatedEnemyController : MonoBehaviour
             }
         }
 
-        magazineSpawner.HandleMagazineSpawning(transform.position);
+        MagazineSpawner.Instance.HandleMagazineSpawning(transform.position);
 
         StartCoroutine(FadeOutSprite(fadeOutTime));
+
+        
     }
 
     private IEnumerator FadeOutSprite(float duration)
@@ -192,11 +192,13 @@ public class AnimatedEnemyController : MonoBehaviour
 
             spriteRenderer.color = endColor;
 
-            gameObject.SetActive(false);
-
-            if (gameObject.tag != "Player")
+            if (EnemySpawner.Instance != null)
             {
-                //Debug.Log("OnDeathAnimationComplete: Adding points to ScoreManager.");
+                EnemySpawner.Instance.ReleaseEnemy(gameObject);
+            }
+            else
+            {
+                Debug.LogWarning("EnemySpawner instance not found.");
             }
         }
     }
