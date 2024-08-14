@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PauseManager : MonoBehaviour
 {
     public GameObject pauseMenu;
+    [SerializeField]
     private bool isGamePaused = false;
     private PlayerInputActions playerInputActions;
     public static PauseManager Instance;
