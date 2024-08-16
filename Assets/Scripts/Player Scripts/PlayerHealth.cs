@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -6,6 +7,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     private int totalHealth = 5;
     private int health = 5;
+
+    public GameObject blood_effect_UI;
 
     // Reference to the GameOver UI parent
     [SerializeField]
@@ -27,6 +30,9 @@ public class PlayerHealth : MonoBehaviour
 
         float healthRatio = (float)health / (float)totalHealth;
         healthBar.localScale = new Vector3(healthRatio, healthBar.localScale.y, healthBar.localScale.z);
+
+        // Activate the object, wait for 1 second, then deactivate
+        ActivateAndReactivateObject().Forget();
     }
 
     public void Death()
@@ -74,5 +80,15 @@ public class PlayerHealth : MonoBehaviour
 
         float healthRatio = (float)health / (float)totalHealth;
         healthBar.localScale = new Vector3(healthRatio, healthBar.localScale.y, healthBar.localScale.z);
+    }
+
+    private async UniTaskVoid ActivateAndReactivateObject()
+    {
+        // Replace this with the actual game object you want to activate and deactivate
+
+
+        blood_effect_UI.SetActive(true); // Activate the object
+        await UniTask.Delay(1000); // Wait for 1 second
+        blood_effect_UI.SetActive(false); // Deactivate the object
     }
 }

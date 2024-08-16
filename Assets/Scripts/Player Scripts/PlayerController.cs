@@ -6,12 +6,15 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 100f;
+
     public float dashSpeed = 10f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 2f;
+    public GameObject dashAvailableCanvas;
+
     public GameObject bulletPrefab;
     public Transform shootPoint;
-    public GameObject dashAvailableCanvas; // Reference to the UI canvas element
+    
     public PlayerInputActions playerInputActions;
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -19,11 +22,17 @@ public class PlayerController : MonoBehaviour
     private bool controlsEnabled = true;
     public BulletController bulletController;
     public PlayerHealth playerHealth;
-    private bool isGrounded = false; // Initialized to false
+    private bool isGrounded = false; 
     private int jumpCount = 0;
-    public int maxJumps = 2;  // Limit to 2 jumps (regular + double jump)
+    public int maxJumps = 2; 
     private float lastDashTime = -Mathf.Infinity;
     private bool isDashing = false;
+
+    public float coyoteTime = 0.2f;
+    private float coyoteTimeCounter;
+
+    public float jumpBufferTime = 0.1f; 
+    private float jumpBufferCounter;
 
     void Awake()
     {
