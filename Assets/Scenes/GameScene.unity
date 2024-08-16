@@ -5658,7 +5658,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0026855469, y: -54.000015}
+  m_AnchoredPosition: {x: -0.0026855469, y: -54.00003}
   m_SizeDelta: {x: -0.0048828, y: 0.0018311}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &245854366630657367
@@ -6942,11 +6942,6 @@ MonoBehaviour:
   isFacingRight: 1
   bulletController: {fileID: 6866671501839712328}
   playerHealth: {fileID: 1158253066335143188}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  groundCheck: {fileID: 308839620}
-  groundCheckRadius: 0.2
   maxJumps: 2
 --- !u!114 &1652510308971385852
 MonoBehaviour:
