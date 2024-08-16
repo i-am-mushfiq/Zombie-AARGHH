@@ -1,12 +1,17 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 100f;
+    public float dashSpeed = 10f;
+    public float dashDuration = 0.2f;
+    public float dashCooldown = 2f;
     public GameObject bulletPrefab;
     public Transform shootPoint;
+    public GameObject dashAvailableCanvas; // Reference to the UI canvas element
     public PlayerInputActions playerInputActions;
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -17,6 +22,8 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded = false; // Initialized to false
     private int jumpCount = 0;
     public int maxJumps = 2;  // Limit to 2 jumps (regular + double jump)
+    private float lastDashTime = -Mathf.Infinity;
+    private bool isDashing = false;
 
     void Awake()
     {
@@ -29,6 +36,7 @@ public class PlayerController : MonoBehaviour
         playerInputActions.Player.Jump.performed += ctx => Jump();
         playerInputActions.Player.Shoot.performed += ctx => Shoot();
         playerInputActions.Player.Reload.performed += ctx => Reload();
+        playerInputActions.Player.Dash.performed += ctx => Dash();
     }
 
     void OnEnable()
@@ -53,10 +61,18 @@ public class PlayerController : MonoBehaviour
         {
             jumpCount = 0;  // Reset jump count when grounded
         }
+
+        // Reactivate the dashAvailableCanvas if the cooldown has ended
+        if (Time.time >= lastDashTime + dashCooldown)
+        {
+            dashAvailableCanvas.gameObject.SetActive(true);
+        }
     }
 
     void Move()
     {
+        if (isDashing) return;
+
         Vector2 moveVelocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
         rb.velocity = moveVelocity;
 
@@ -91,6 +107,27 @@ public class PlayerController : MonoBehaviour
                 isGrounded = false;
             }
         }
+    }
+
+    void Dash()
+    {
+        if (controlsEnabled && Time.time >= lastDashTime + dashCooldown)
+        {
+            StartCoroutine(DashRoutine());
+            lastDashTime = Time.time;
+            dashAvailableCanvas.gameObject.SetActive(false); // Deactivate the dash canvas on dash
+        }
+    }
+
+    IEnumerator DashRoutine()
+    {
+        isDashing = true;
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0;
+        rb.velocity = new Vector2((isFacingRight ? 1 : -1) * dashSpeed, 0);
+        yield return new WaitForSeconds(dashDuration);
+        rb.gravityScale = originalGravity;
+        isDashing = false;
     }
 
     void Shoot()
