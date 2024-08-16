@@ -14,10 +14,9 @@ public class PlayerController : MonoBehaviour
     private bool controlsEnabled = true;
     public BulletController bulletController;
     public PlayerHealth playerHealth;
-    //private bool isGrounded = true;
-    public LayerMask groundLayer;
-    public Transform groundCheck;
-    public float groundCheckRadius = 0.2f;
+    private bool isGrounded = false; // Initialized to false
+    private int jumpCount = 0;
+    public int maxJumps = 2;  // Limit to 2 jumps (regular + double jump)
 
     void Awake()
     {
@@ -30,8 +29,6 @@ public class PlayerController : MonoBehaviour
         playerInputActions.Player.Jump.performed += ctx => Jump();
         playerInputActions.Player.Shoot.performed += ctx => Shoot();
         playerInputActions.Player.Reload.performed += ctx => Reload();
-
-        
     }
 
     void OnEnable()
@@ -51,8 +48,11 @@ public class PlayerController : MonoBehaviour
         {
             Move();
         }
-        // Check if the player is grounded
-        //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        if (isGrounded)
+        {
+            jumpCount = 0;  // Reset jump count when grounded
+        }
     }
 
     void Move()
@@ -80,11 +80,16 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        //if (controlsEnabled && isGrounded)
-        if (controlsEnabled)
+        if (controlsEnabled && (isGrounded || jumpCount < maxJumps))
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            //isGrounded = false;
+            jumpCount++;
+
+            // If the player is grounded, jumping will make them not grounded
+            if (isGrounded)
+            {
+                isGrounded = false;
+            }
         }
     }
 
@@ -96,7 +101,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            //Debug.LogWarning("BulletController not assigned or controls disabled!");
+            Debug.LogWarning("BulletController not assigned or controls disabled!");
         }
     }
 
@@ -125,7 +130,13 @@ public class PlayerController : MonoBehaviour
         if (controlsEnabled && other.collider.CompareTag("Enemy"))
         {
             other.gameObject.SetActive(false);
+            // Needs to be returned to the pool
             TakeDamage();
+        }
+
+        if (other.collider.CompareTag("Ground"))
+        {
+            isGrounded = true; // Player is grounded when colliding with "Ground"
         }
     }
 
@@ -133,7 +144,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.collider.CompareTag("Ground"))
         {
-            //isGrounded = false;
+            isGrounded = false; // Player is no longer grounded when leaving "Ground"
         }
     }
 
