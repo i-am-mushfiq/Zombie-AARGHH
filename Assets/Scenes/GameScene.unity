@@ -1005,7 +1005,7 @@ Transform:
   m_GameObject: {fileID: 336591201}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -0.01000008, z: -2}
+  m_LocalPosition: {x: 0.5, y: -0.01700005, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1360,9 +1360,9 @@ GameObject:
   m_Component:
   - component: {fileID: 490836718}
   - component: {fileID: 490836717}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platform
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1529,7 +1529,7 @@ GameObject:
   m_Component:
   - component: {fileID: 514665207}
   - component: {fileID: 514665208}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (2)
   m_TagString: Untagged
@@ -1594,7 +1594,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1083b3a289738e34d863d9c07a54e91c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7924528, g: 0.43672663, b: 0.025418244, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1736,7 +1736,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -0.01000008, z: -2}
+  m_LocalPosition: {x: 0.5, y: -0.01700005, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2097,7 +2097,7 @@ GameObject:
   m_Component:
   - component: {fileID: 612182256}
   - component: {fileID: 612182257}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2161,7 +2161,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1083b3a289738e34d863d9c07a54e91c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7924528, g: 0.43672663, b: 0.025418244, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2435,7 +2435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 803260333}
   - component: {fileID: 803260334}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (1)
   m_TagString: Untagged
@@ -2500,7 +2500,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1083b3a289738e34d863d9c07a54e91c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7924528, g: 0.43672663, b: 0.025418244, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2730,7 +2730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 901388871}
   - component: {fileID: 901388872}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (1)
   m_TagString: Untagged
@@ -2795,7 +2795,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1083b3a289738e34d863d9c07a54e91c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7924528, g: 0.43672663, b: 0.025418244, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2866,7 +2866,7 @@ GameObject:
   m_Component:
   - component: {fileID: 928597527}
   - component: {fileID: 928597528}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (3)
   m_TagString: Untagged
@@ -2931,7 +2931,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1083b3a289738e34d863d9c07a54e91c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7924528, g: 0.43672663, b: 0.025418244, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3157,7 +3157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1036798088}
   - component: {fileID: 1036798089}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3506,7 +3506,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1097982906}
   - component: {fileID: 1097982907}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (2)
   m_TagString: Untagged
@@ -3571,7 +3571,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1083b3a289738e34d863d9c07a54e91c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7924528, g: 0.43672663, b: 0.025418244, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3591,7 +3591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1106952661}
   - component: {fileID: 1106952662}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (1)
   m_TagString: Untagged
@@ -4155,7 +4155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1352829480}
   - component: {fileID: 1352829481}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (3)
   m_TagString: Untagged
@@ -4220,7 +4220,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1083b3a289738e34d863d9c07a54e91c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7924528, g: 0.43672663, b: 0.025418244, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4986,9 +4986,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1540959461}
   - component: {fileID: 1540959460}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platform (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5289,7 +5289,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1616183559}
   - component: {fileID: 1616183560}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5353,7 +5353,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1083b3a289738e34d863d9c07a54e91c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7924528, g: 0.43672663, b: 0.025418244, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5595,7 +5595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1783427369}
   - component: {fileID: 1783427370}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (3)
   m_TagString: Untagged
@@ -5612,7 +5612,7 @@ Transform:
   m_GameObject: {fileID: 1783427368}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.067, y: 0, z: 0}
+  m_LocalPosition: {x: 2.062, y: 0, z: 0}
   m_LocalScale: {x: 0.033343147, y: 0.033343147, z: 0.033343147}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5660,7 +5660,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1083b3a289738e34d863d9c07a54e91c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7924528, g: 0.43672663, b: 0.025418244, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -6341,8 +6341,8 @@ Transform:
   m_GameObject: {fileID: 2002841524}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -67.9, y: -29, z: -10696.745}
-  m_LocalScale: {x: 6.1761694, y: 6.1761694, z: 6.1761694}
+  m_LocalPosition: {x: -77.28, y: -29.4, z: -10696.745}
+  m_LocalScale: {x: 9.820109, y: 9.820109, z: 9.820109}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1245869067}
@@ -6409,9 +6409,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2038111917}
   - component: {fileID: 2038111916}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Platform (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6595,7 +6595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2100263381}
   - component: {fileID: 2100263382}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (2)
   m_TagString: Untagged
@@ -7003,7 +7003,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0026855469, y: -54.00003}
+  m_AnchoredPosition: {x: -0.0026855469, y: -54}
   m_SizeDelta: {x: -0.0048828, y: 0.0018311}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &245854366630657367
@@ -7644,7 +7644,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00978446, y: -2.0044856}
+  m_Offset: {x: 0.00978446, y: -0.18399853}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -7655,7 +7655,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.0390167, y: 0.57191086}
+  m_Size: {x: 2.0390167, y: 4.212885}
   m_EdgeRadius: 0
 --- !u!224 &811054968827485766
 RectTransform:
@@ -10264,7 +10264,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingOrder: 1
   m_Sprite: {fileID: -5177388603050735206, guid: 0af4074239115714a9cfd79f2377bfa1, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -10538,7 +10538,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -5177388603050735206, guid: 0af4074239115714a9cfd79f2377bfa1, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -10596,7 +10596,7 @@ Transform:
   m_GameObject: {fileID: 4406851181719474658}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.14, z: 0}
+  m_LocalPosition: {x: 0, y: -2.147, z: 0}
   m_LocalScale: {x: 0.5386, y: 0.5232, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
