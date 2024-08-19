@@ -3290,7 +3290,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 922461005}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 044035ca0a4c40b4295a04443d4ff45f, type: 3}
   m_Name: 
@@ -8216,7 +8216,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0026855469, y: -54}
+  m_AnchoredPosition: {x: -0.0026855469, y: -53.99997}
   m_SizeDelta: {x: -0.0048828, y: 0.0018311}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &245854366630657367
@@ -9495,7 +9495,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpForce: 700
+  jumpForce: 850
+  jumpApexModifier: 3
   dashSpeed: 15
   dashDuration: 0.2
   dashCooldown: 1
@@ -9505,9 +9506,8 @@ MonoBehaviour:
   isFacingRight: 1
   bulletController: {fileID: 6866671501839712328}
   playerHealth: {fileID: 1158253066335143188}
-  maxJumps: 2
-  coyoteTime: 0.2
-  jumpBufferTime: 0.1
+  coyoteTime: 0.1
+  jumpBufferTime: 0.2
 --- !u!114 &1652510308971385852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11538,6 +11538,7 @@ GameObject:
   - component: {fileID: 1158253066335143188}
   - component: {fileID: 5233021640794747587}
   - component: {fileID: 7652661769217758978}
+  - component: {fileID: 7652661769217758979}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -14083,6 +14084,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magazinePool: {fileID: 2708080692958270890}
+--- !u!114 &7652661769217758979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4406851181719474658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2251b651ddeed2489815f26b026e905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trailSize: 6
+  spacing: 6
+  color: {r: 255, g: 255, b: 255, a: 100}
+  ghostMaterial: []
+  ghostSpriteSortingOrder: 0
+  renderOnMotion: 0
+  colorAlphaOverride: 1
+  alphaFluctuationOverride: 0.646
+  alphaFluctuationDivisor: 74
 --- !u!222 &7667954984262660228
 CanvasRenderer:
   m_ObjectHideFlags: 0

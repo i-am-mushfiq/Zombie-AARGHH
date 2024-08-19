@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 100f;
+    public float jumpApexModifier = 1.2f; // Modifier for the jump apex
 
     public float dashSpeed = 10f;
     public float dashDuration = 0.2f;
@@ -14,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject bulletPrefab;
     public Transform shootPoint;
-    
+
     public PlayerInputActions playerInputActions;
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -22,17 +23,16 @@ public class PlayerController : MonoBehaviour
     private bool controlsEnabled = true;
     public BulletController bulletController;
     public PlayerHealth playerHealth;
-    private bool isGrounded = false; 
-    private int jumpCount = 0;
-    public int maxJumps = 2; 
-    private float lastDashTime = -Mathf.Infinity;
-    private bool isDashing = false;
+    private bool isGrounded = false;
 
     public float coyoteTime = 0.2f;
     private float coyoteTimeCounter;
 
-    public float jumpBufferTime = 0.1f; 
+    public float jumpBufferTime = 0.1f;
     private float jumpBufferCounter;
+
+    private float lastDashTime = -Mathf.Infinity; // Ensure this is declared and initialized
+    private bool isDashing = false; // Ensure this is declared
 
     void Awake()
     {
@@ -61,15 +61,26 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (controlsEnabled)
+        if (controlsEnabled && isGrounded)
         {
             Move();
         }
 
+        // Handle coyote time and jump buffering logic
         if (isGrounded)
         {
-            jumpCount = 0;  // Reset jump count when grounded
+            coyoteTimeCounter = coyoteTime; // Reset coyote time counter when grounded
+            if (jumpBufferCounter > 0f)
+            {
+                Jump(); // Execute jump if within the buffer time
+            }
         }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime; // Decrease coyote time counter
+        }
+
+        jumpBufferCounter -= Time.deltaTime; // Decrease jump buffer counter
 
         // Reactivate the dashAvailableCanvas if the cooldown has ended
         if (Time.time >= lastDashTime + dashCooldown)
@@ -80,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        if (isDashing) return;
+        if (isDashing || !isGrounded) return; // Prevent movement if dashing or in the air
 
         Vector2 moveVelocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
         rb.velocity = moveVelocity;
@@ -105,16 +116,28 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (controlsEnabled && (isGrounded || jumpCount < maxJumps))
+        if (controlsEnabled && (isGrounded || coyoteTimeCounter > 0))
         {
+            rb.velocity = new Vector2(rb.velocity.x, 0); // Reset the vertical velocity
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            jumpCount++;
+            coyoteTimeCounter = 0; // Reset coyote time after jumping
+            jumpBufferCounter = 0; // Reset jump buffer after jumping
+
+            // Apply the jump apex modifier if the player is in the air and moving upwards
+            if (!isGrounded && rb.velocity.y > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * jumpApexModifier);
+            }
 
             // If the player is grounded, jumping will make them not grounded
             if (isGrounded)
             {
                 isGrounded = false;
             }
+        }
+        else
+        {
+            jumpBufferCounter = jumpBufferTime; // Set jump buffer if jump can't be executed
         }
     }
 
