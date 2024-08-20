@@ -1197,7 +1197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 308839620}
   - component: {fileID: 308839619}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1521,6 +1521,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 364436195}
   m_CullTransparentMesh: 1
+--- !u!1 &366320023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 366320024}
+  m_Layer: 0
+  m_Name: GroundChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &366320024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366320023}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.06, y: -2.27, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5115197245598370689}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &379856476
 GameObject:
   m_ObjectHideFlags: 0
@@ -8016,7 +8047,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3758574152099159614}
   - component: {fileID: 5824145305797606553}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Destroyer 2
   m_TagString: Destroyer
   m_Icon: {fileID: 0}
@@ -9533,11 +9564,15 @@ MonoBehaviour:
   dashDuration: 0.2
   dashCooldown: 2
   dashAvailableCanvas: {fileID: 2002841524}
-  bulletPrefab: {fileID: 3997374913226580898, guid: 3dcca0900a3824e45bd263304359cf0d, type: 3}
   shootPoint: {fileID: 8121815630234044932}
+  groundCheckPoint: {fileID: 366320024}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
   isFacingRight: 1
   bulletController: {fileID: 6866671501839712328}
   playerHealth: {fileID: 1158253066335143188}
+  overlapRadius: 0.28
 --- !u!114 &1652510308971385852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11572,7 +11607,7 @@ GameObject:
   - component: {fileID: 7652661769217758980}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Ground
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11853,6 +11888,7 @@ Transform:
   - {fileID: 8121815630234044932}
   - {fileID: 1826333481439517434}
   - {fileID: 9209757622756039220}
+  - {fileID: 366320024}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5122571785761575193
@@ -12972,7 +13008,7 @@ GameObject:
   m_Component:
   - component: {fileID: 549794513888565054}
   - component: {fileID: 170269563296893238}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Destroyer
   m_TagString: Destroyer
   m_Icon: {fileID: 0}

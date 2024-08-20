@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public GameObject dashAvailableCanvas;
 
     public Transform shootPoint;
+    public Transform groundCheckPoint; // New Transform for ground check
+    public LayerMask groundLayer; // LayerMask to specify ground layers
 
     public PlayerInputActions playerInputActions;
     private Rigidbody2D rb;
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     private PlayerJumpController playerJumpController; // Reference to PlayerJumpController
 
+    public float overlapRadius;
     void Awake()
     {
         controlsEnabled = true;
@@ -53,7 +56,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (controlsEnabled && playerJumpController.IsGrounded())
+        if (controlsEnabled && IsGrounded())
         {
             Move();
         }
@@ -63,11 +66,13 @@ public class PlayerController : MonoBehaviour
         {
             dashAvailableCanvas.gameObject.SetActive(true);
         }
+
+        Debug.Log("isGrounded:" + IsGrounded());
     }
 
     void Move()
     {
-        if (isDashing || !playerJumpController.IsGrounded()) return; // Prevent movement if dashing or in the air
+        if (isDashing || !IsGrounded()) return; // Prevent movement if dashing or in the air
 
         Vector2 moveVelocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
         rb.velocity = moveVelocity;
@@ -82,15 +87,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public bool IsGrounded()
+    bool IsGrounded()
     {
-        return playerJumpController.IsGrounded();
+        playerJumpController.SetGroundedState(Physics2D.OverlapCircle(groundCheckPoint.position, overlapRadius, groundLayer));
+        return Physics2D.OverlapCircle(groundCheckPoint.position, overlapRadius, groundLayer);
+        
+    }
+    void OnDrawGizmos()
+    {
+        // Draw a red circle around the ground check point
+        if (groundCheckPoint != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(groundCheckPoint.position, overlapRadius);
+        }
     }
 
     public bool IsFacingRight()
     {
         return isFacingRight;
     }
+
     void Flip()
     {
         isFacingRight = !isFacingRight;
@@ -149,28 +166,6 @@ public class PlayerController : MonoBehaviour
         if (controlsEnabled && playerHealth != null)
         {
             playerHealth.TakeDamage();
-        }
-    }
-
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        if (controlsEnabled && other.collider.CompareTag("Enemy"))
-        {
-            other.gameObject.SetActive(false);
-            TakeDamage();
-        }
-
-        if (other.collider.CompareTag("Ground"))
-        {
-            playerJumpController.SetGroundedState(true); 
-        }
-    }
-
-    void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.collider.CompareTag("Ground"))
-        {
-            playerJumpController.SetGroundedState(false); 
         }
     }
 
