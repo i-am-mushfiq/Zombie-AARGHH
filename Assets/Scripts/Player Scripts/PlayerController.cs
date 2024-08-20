@@ -1,19 +1,15 @@
 using UnityEngine;
-using System.Collections;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float jumpForce = 100f;
-    public float jumpApexModifier = 1.2f; // Modifier for the jump apex
-
     public float dashSpeed = 10f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 2f;
     public GameObject dashAvailableCanvas;
 
-    public GameObject bulletPrefab;
     public Transform shootPoint;
 
     public PlayerInputActions playerInputActions;
@@ -23,26 +19,22 @@ public class PlayerController : MonoBehaviour
     private bool controlsEnabled = true;
     public BulletController bulletController;
     public PlayerHealth playerHealth;
-    private bool isGrounded = false;
 
-    public float coyoteTime = 0.2f;
-    private float coyoteTimeCounter;
+    private float lastDashTime = -Mathf.Infinity;
+    private bool isDashing = false;
 
-    public float jumpBufferTime = 0.1f;
-    private float jumpBufferCounter;
-
-    private float lastDashTime = -Mathf.Infinity; // Ensure this is declared and initialized
-    private bool isDashing = false; // Ensure this is declared
+    private PlayerJumpController playerJumpController; // Reference to PlayerJumpController
 
     void Awake()
     {
         controlsEnabled = true;
         playerInputActions = new PlayerInputActions();
         rb = GetComponent<Rigidbody2D>();
+        playerJumpController = GetComponent<PlayerJumpController>(); // Get reference to PlayerJumpController
 
         playerInputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         playerInputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
-        playerInputActions.Player.Jump.performed += ctx => Jump();
+        playerInputActions.Player.Jump.performed += ctx => playerJumpController.Jump(); // Delegate jump to PlayerJumpController
         playerInputActions.Player.Shoot.performed += ctx => Shoot();
         playerInputActions.Player.Reload.performed += ctx => Reload();
         playerInputActions.Player.Dash.performed += ctx => Dash();
@@ -61,26 +53,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (controlsEnabled && isGrounded)
+        if (controlsEnabled && playerJumpController.IsGrounded())
         {
             Move();
         }
-
-        // Handle coyote time and jump buffering logic
-        if (isGrounded)
-        {
-            coyoteTimeCounter = coyoteTime; // Reset coyote time counter when grounded
-            if (jumpBufferCounter > 0f)
-            {
-                Jump(); // Execute jump if within the buffer time
-            }
-        }
-        else
-        {
-            coyoteTimeCounter -= Time.deltaTime; // Decrease coyote time counter
-        }
-
-        jumpBufferCounter -= Time.deltaTime; // Decrease jump buffer counter
 
         // Reactivate the dashAvailableCanvas if the cooldown has ended
         if (Time.time >= lastDashTime + dashCooldown)
@@ -91,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        if (isDashing || !isGrounded) return; // Prevent movement if dashing or in the air
+        if (isDashing || !playerJumpController.IsGrounded()) return; // Prevent movement if dashing or in the air
 
         Vector2 moveVelocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
         rb.velocity = moveVelocity;
@@ -106,6 +82,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public bool IsGrounded()
+    {
+        return playerJumpController.IsGrounded();
+    }
+
+    public bool IsFacingRight()
+    {
+        return isFacingRight;
+    }
     void Flip()
     {
         isFacingRight = !isFacingRight;
@@ -114,40 +99,13 @@ public class PlayerController : MonoBehaviour
         transform.localScale = theScale;
     }
 
-    void Jump()
-    {
-        if (controlsEnabled && (isGrounded || coyoteTimeCounter > 0))
-        {
-            rb.velocity = new Vector2(rb.velocity.x, 0); // Reset the vertical velocity
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            coyoteTimeCounter = 0; // Reset coyote time after jumping
-            jumpBufferCounter = 0; // Reset jump buffer after jumping
-
-            // Apply the jump apex modifier if the player is in the air and moving upwards
-            if (!isGrounded && rb.velocity.y > 0)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * jumpApexModifier);
-            }
-
-            // If the player is grounded, jumping will make them not grounded
-            if (isGrounded)
-            {
-                isGrounded = false;
-            }
-        }
-        else
-        {
-            jumpBufferCounter = jumpBufferTime; // Set jump buffer if jump can't be executed
-        }
-    }
-
     void Dash()
     {
         if (controlsEnabled && Time.time >= lastDashTime + dashCooldown)
         {
             StartCoroutine(DashRoutine());
             lastDashTime = Time.time;
-            dashAvailableCanvas.gameObject.SetActive(false); // Deactivate the dash canvas on dash
+            dashAvailableCanvas.gameObject.SetActive(false);
         }
     }
 
@@ -199,13 +157,12 @@ public class PlayerController : MonoBehaviour
         if (controlsEnabled && other.collider.CompareTag("Enemy"))
         {
             other.gameObject.SetActive(false);
-            // Needs to be returned to the pool
             TakeDamage();
         }
 
         if (other.collider.CompareTag("Ground"))
         {
-            isGrounded = true; // Player is grounded when colliding with "Ground"
+            playerJumpController.SetGroundedState(true); 
         }
     }
 
@@ -213,7 +170,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.collider.CompareTag("Ground"))
         {
-            isGrounded = false; // Player is no longer grounded when leaving "Ground"
+            playerJumpController.SetGroundedState(false); 
         }
     }
 

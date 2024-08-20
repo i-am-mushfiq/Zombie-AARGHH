@@ -40,7 +40,7 @@ public class BulletController : MonoBehaviour
                     bullet.transform.position = spawnPoint.position;
                     bullet.SetActive(true);
 
-                    bullet.GetComponent<Bullet>().SetDirection(playerController.isFacingRight ? Vector2.right : Vector2.left);
+                    bullet.GetComponent<Bullet>().SetDirection(playerController.IsFacingRight() ? Vector2.right : Vector2.left);
                     if (muzzleHandler != null)
                     {
                         muzzleHandler.gameObject.SetActive(true);

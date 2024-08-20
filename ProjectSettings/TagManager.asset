@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Destroyer
   - DeadEnemy
+  - Platform
   layers:
   - Default
   - TransparentFX
