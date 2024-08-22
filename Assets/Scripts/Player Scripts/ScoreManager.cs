@@ -6,8 +6,10 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance { get; private set; }
 
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI killStreakText; // Optional: Display kill streak in the UI
 
     private int score = 0;
+    private int killStreak = 0; // Counter for the kill streak
 
     private void Awake()
     {
@@ -25,7 +27,15 @@ public class ScoreManager : MonoBehaviour
     public void AddPoints(int points)
     {
         score += points;
+        killStreak++;
         UpdateScoreText();
+        UpdateKillStreakText();
+    }
+
+    public void ResetKillStreak()
+    {
+        killStreak = 0;
+        UpdateKillStreakText();
     }
 
     private void UpdateScoreText()
@@ -33,9 +43,21 @@ public class ScoreManager : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
-    // New method to get the current score
+    private void UpdateKillStreakText()
+    {
+        if (killStreakText != null)
+        {
+            killStreakText.text = "Kill Streak: " + killStreak;
+        }
+    }
+
     public int GetScore()
     {
         return score;
+    }
+
+    public int GetKillStreak()
+    {
+        return killStreak;
     }
 }

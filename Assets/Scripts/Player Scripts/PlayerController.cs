@@ -182,6 +182,15 @@ public class PlayerController : MonoBehaviour
         controlsEnabled = !isPaused;
     }
 
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (controlsEnabled && other.collider.CompareTag("Enemy"))
+        {
+            other.gameObject.SetActive(false);
+            TakeDamage();
+        }
+    }
+
     void OnDestroy()
     {
         if (PauseManager.Instance != null)

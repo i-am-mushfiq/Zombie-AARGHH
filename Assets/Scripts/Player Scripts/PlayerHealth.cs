@@ -32,6 +32,7 @@ public class PlayerHealth : MonoBehaviour
         healthBar.localScale = new Vector3(healthRatio, healthBar.localScale.y, healthBar.localScale.z);
 
         // Activate the object, wait for 1 second, then deactivate
+        ScoreManager.Instance.ResetKillStreak();
         ActivateAndReactivateObject().Forget();
     }
 
