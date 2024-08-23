@@ -87,6 +87,7 @@ public class EnemyController : MonoBehaviour
     {
         if (healthBarScript != null)
         {
+            ZombieSoundManager.Instance.PlayZombieHurtSound();
             healthBarScript.TakeDamage();
         }
     }
@@ -96,6 +97,7 @@ public class EnemyController : MonoBehaviour
         gameObject.SetActive(false);
         if (gameObject.tag != "Player")
         {
+            ZombieSoundManager.Instance.PlayZombieHurtSound();
             ScoreManager.Instance.AddPoints(hitPoints);
         }
     }

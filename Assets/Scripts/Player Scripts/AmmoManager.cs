@@ -43,7 +43,7 @@ public class AmmoManager : MonoBehaviour
 
     public bool UseAmmo()
     {
-        Debug.Log(currentMagazines);
+        //Debug.Log(currentMagazines);
         if (isReloading)
         {
             Debug.Log("Reloading...");
@@ -53,13 +53,14 @@ public class AmmoManager : MonoBehaviour
         if (currentAmmo > 0)
         {
             currentAmmo--;
+
+            ShootAudioManager.Instance.PlayFireSound();
             UpdateAmmoUI();
 
             if (currentAmmo == 0 && currentMagazines > 0)
             {
                 Reload().Forget();
             }
-
             return true;
         }
         else
@@ -105,6 +106,7 @@ public class AmmoManager : MonoBehaviour
     {
         if (!isReloading && currentAmmo < maxAmmo && currentMagazines > 0)
         {
+            ShootAudioManager.Instance.PlayReloadSound();
             isReloading = true;
             Debug.Log("Reloading...");
 

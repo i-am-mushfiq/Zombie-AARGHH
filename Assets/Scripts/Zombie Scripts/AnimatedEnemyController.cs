@@ -120,6 +120,7 @@ public class AnimatedEnemyController : MonoBehaviour
         }
 
         StopMovement();
+        ZombieSoundManager.Instance.PlayZombieHurtSound();
         animator.SetBool("takeDamage", true);
     }
 
@@ -139,6 +140,7 @@ public class AnimatedEnemyController : MonoBehaviour
     {
         isDead = true;
         ScoreManager.Instance.AddPoints(hitPoints);
+        ZombieSoundManager.Instance.PlayZombieDeathSound();
         gameObject.tag = "DeadEnemy";
         animator.SetTrigger("death");
 

@@ -60,7 +60,7 @@ public class HealthKitHandler : MonoBehaviour
     private bool ShouldDropHealthKit()
     {
         float randomValue = Random.value;
-        Debug.Log("Random Value is " + randomValue);
+        //Debug.Log("Random Value is " + randomValue);
         return randomValue < dropChance;
     }
 

@@ -97,7 +97,7 @@ public class EnemySpawner : MonoBehaviour
         int activeCount = ((ObjectPool<GameObject>)enemyPool).CountActive;
         int inactiveCount = ((ObjectPool<GameObject>)enemyPool).CountInactive;
 
-        Debug.Log($"Pool Stats - Total: {totalCount}, Active: {activeCount}, Inactive: {inactiveCount}");
+        //Debug.Log($"Pool Stats - Total: {totalCount}, Active: {activeCount}, Inactive: {inactiveCount}");
     }
 
     public void ReleaseEnemy(GameObject enemy)

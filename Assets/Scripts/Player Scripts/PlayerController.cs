@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
             dashAvailableCanvas.gameObject.SetActive(true);
         }
 
-        Debug.Log("isGrounded:" + IsGrounded());
+        //Debug.Log("isGrounded:" + IsGrounded());
     }
 
     void Move()
