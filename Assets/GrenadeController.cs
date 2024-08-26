@@ -5,11 +5,10 @@ public class GrenadeController : MonoBehaviour
     public GameObject grenadePrefab;    // Reference to the grenade prefab
     public Transform throwPoint;        // Point from which the grenade will be thrown
     public float throwForce = 10f;      // Force applied to throw the grenade
+    public float throwAngle = 45f;      // Angle at which the grenade will be thrown
 
     public void Throw(bool throwRight)
     {
-        
-
         if (grenadePrefab == null || throwPoint == null)
         {
             Debug.Log("GrenadePrefab or ThrowPoint is not assigned.");
@@ -17,14 +16,20 @@ public class GrenadeController : MonoBehaviour
         }
 
         GameObject grenade = Instantiate(grenadePrefab, throwPoint.position, throwPoint.rotation);
-        Debug.Log("Throwing !");
+        Debug.Log("Throwing!");
 
         Rigidbody2D rb = grenade.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            Vector2 throwDirection = throwRight ? Vector2.right : Vector2.left;
+            float radians = throwAngle * Mathf.Deg2Rad;
+            Vector2 throwDirection = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
 
-            rb.AddForce(throwDirection.normalized * throwForce, ForceMode2D.Impulse);
+            if (!throwRight)
+            {
+                throwDirection.x *= -1;
+            }
+
+            rb.AddForce(throwDirection * throwForce, ForceMode2D.Impulse);
         }
         else
         {
