@@ -50,7 +50,7 @@ public class AnimatedEnemyController : MonoBehaviour
         if (healthBarScript != null)
         {
             healthBarScript.OnHealthDepleted += Death;
-            healthBarScript.OnHealthDamaged += TakeDamage;
+            healthBarScript.OnHealthDamaged += (damage) => TakeDamage(damage);
         }
     }
 
@@ -110,8 +110,9 @@ public class AnimatedEnemyController : MonoBehaviour
         animator.SetBool("isWalking", true);
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
+        healthBarScript.TakeDamage(damage);
         if (isDead) return;
 
         if (impactParticleSystem != null)

@@ -5,38 +5,58 @@ public class HealthBar : MonoBehaviour
     public Transform healthBar;
     [SerializeField]
     private int totalHealth = 5;
-    private int health = 5;
+    private int health;
 
     public delegate void HealthDepleted();
     public event HealthDepleted OnHealthDepleted;
 
-    public delegate void HealthDamaged();
+    public delegate void HealthDamaged(int damage);
     public event HealthDamaged OnHealthDamaged;
 
-    public void Start()
+    void Start()
     {
-        health = totalHealth;
+        ResetHealth(); 
     }
 
     public void TakeDamage()
     {
-        health--;
+        TakeDamage(1);
+    }
 
-        OnHealthDamaged?.Invoke();
-        //Debug.Log("invoke called");
+    public void TakeDamage(int damage)
+    {
+        if (damage < 0)
+        {
+            Debug.LogWarning("Damage cannot be negative.");
+            return;
+        }
+
+        health -= damage;
+
+        if (health < 0)
+        {
+            health = 0;
+        }
+
+        //OnHealthDamaged?.Invoke(damage);
 
         if (health <= 0)
         {
             OnHealthDepleted?.Invoke();
         }
 
-        float healthRatio = (float)health / (float)totalHealth;
-        healthBar.localScale = new Vector3(healthRatio, healthBar.localScale.y, healthBar.localScale.z);
+        UpdateHealthBar();
     }
 
     public void ResetHealth()
     {
         health = totalHealth;
-        healthBar.localScale = new Vector3(1, healthBar.localScale.y, healthBar.localScale.z);
+        UpdateHealthBar();
+    }
+
+    private void UpdateHealthBar()
+    {
+        float healthRatio = (float)health / totalHealth;
+        healthBar.localScale = new Vector3(healthRatio, healthBar.localScale.y, healthBar.localScale.z);
     }
 }

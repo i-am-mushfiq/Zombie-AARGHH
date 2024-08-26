@@ -25,7 +25,8 @@ public class PlayerController : MonoBehaviour
     private float lastDashTime = -Mathf.Infinity;
     private bool isDashing = false;
 
-    private PlayerJumpController playerJumpController; // Reference to PlayerJumpController
+    private PlayerJumpController playerJumpController;
+    private GrenadeController grenadeController;// Reference to PlayerJumpController
 
     public float overlapRadius;
     void Awake()
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
         playerInputActions = new PlayerInputActions();
         rb = GetComponent<Rigidbody2D>();
         playerJumpController = GetComponent<PlayerJumpController>(); // Get reference to PlayerJumpController
+        grenadeController = GetComponent<GrenadeController>();
 
         playerInputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         playerInputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
@@ -41,6 +43,7 @@ public class PlayerController : MonoBehaviour
         playerInputActions.Player.Shoot.performed += ctx => Shoot();
         playerInputActions.Player.Reload.performed += ctx => Reload();
         playerInputActions.Player.Dash.performed += ctx => Dash();
+        playerInputActions.Player.Grenade.performed += ctx => grenadeController.Throw(isFacingRight);
     }
 
     void OnEnable()

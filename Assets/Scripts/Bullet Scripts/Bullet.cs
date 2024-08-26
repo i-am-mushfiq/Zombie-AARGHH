@@ -4,6 +4,7 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 10f;
     private Vector2 direction;
+    public int damage = 1;
 
     public void SetDirection(Vector2 newDirection)
     {
@@ -19,10 +20,11 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            HealthBar healthBar = other.GetComponent<HealthBar>();
-            if (healthBar != null)
+            //HealthBar healthBar = other.GetComponent<HealthBar>();
+            AnimatedEnemyController animatedEnemyController = other.GetComponent<AnimatedEnemyController>();
+            if (animatedEnemyController != null)
             {
-                healthBar.TakeDamage();
+                animatedEnemyController.TakeDamage(damage);
             }
             gameObject.SetActive(false);
         }
