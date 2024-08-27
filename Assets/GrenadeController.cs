@@ -16,7 +16,7 @@ public class GrenadeController : MonoBehaviour
         }
 
         GameObject grenade = Instantiate(grenadePrefab, throwPoint.position, throwPoint.rotation);
-        Debug.Log("Throwing!");
+        //Debug.Log("Throwing!");
 
         Rigidbody2D rb = grenade.GetComponent<Rigidbody2D>();
         if (rb != null)

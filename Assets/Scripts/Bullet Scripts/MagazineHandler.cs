@@ -59,7 +59,7 @@ public class MagazineHandler : MonoBehaviour
             return null;
         }
 
-        Debug.Log("Current Magazines: " + ammoManager.currentMagazines);
+        //Debug.Log("Current Magazines: " + ammoManager.currentMagazines);
         if (ammoManager.currentMagazines <= 0 || Random.value <= spawnProbability)
         {
             return magazinePool.Get();

@@ -28,7 +28,7 @@ public class MagazineSpawner : MonoBehaviour
         }
         else
         {
-            Debug.Log("Magazine null");
+            //Debug.Log("Magazine null");
         }
     }
 }

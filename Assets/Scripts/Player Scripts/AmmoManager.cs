@@ -108,7 +108,7 @@ public class AmmoManager : MonoBehaviour
         {
             ShootAudioManager.Instance.PlayReloadSound();
             isReloading = true;
-            Debug.Log("Reloading...");
+            //Debug.Log("Reloading...");
 
             if (reloadSlider != null)
             {
@@ -136,7 +136,7 @@ public class AmmoManager : MonoBehaviour
             UpdateAmmoUI();
             UpdateMagazineUI();
             isReloading = false;
-            Debug.Log("Reloaded.");
+            //Debug.Log("Reloaded.");
 
             if (reloadSlider != null)
             {

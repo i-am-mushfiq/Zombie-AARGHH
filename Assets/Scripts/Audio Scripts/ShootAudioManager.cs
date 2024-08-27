@@ -22,7 +22,7 @@ public class ShootAudioManager : MonoBehaviour
 
     public void PlayFireSound()
     {
-        Debug.Log("in");
+        //Debug.Log("in");
         if (fireSound != null)
         {
             fireSound.Play();
