@@ -165,5 +165,8 @@ MonoBehaviour:
   explosionDelay: 3
   explosionRadius: 2.88
   explosionForce: 700
-  damage: 1
-  animator: {fileID: 0}
+  damage: 2
+  groundExplosionYOffset: 2
+  airExplosionYOffset: 0
+  groundExplosionEffect: {fileID: 1143374043234712150, guid: 78bc6c6fc4e5f984ab0943df3ee01415, type: 3}
+  airExplosionEffect: {fileID: 4123841665483601753, guid: 170b5e149e44e074c983b90858b0bec3, type: 3}
