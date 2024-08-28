@@ -21,7 +21,6 @@ public class GrenadeController : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);  // Optionally persist this instance across scenes
     }
 
     void Start()

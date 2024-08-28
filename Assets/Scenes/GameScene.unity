@@ -10285,7 +10285,7 @@ MonoBehaviour:
   isFacingRight: 1
   bulletController: {fileID: 6866671501839712328}
   playerHealth: {fileID: 1158253066335143188}
-  overlapRadius: 0.28
+  overlapRadius: 0.5
 --- !u!114 &1652510308971385852
 MonoBehaviour:
   m_ObjectHideFlags: 0
