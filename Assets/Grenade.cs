@@ -57,11 +57,24 @@ public class Grenade : MonoBehaviour
 
         hasExploded = true;
 
+        PlayExplosionSound();
+        TriggerExplosionEffect();
+        ApplyExplosionForceAndDamage();
+
+        ResetGrenade();
+        GrenadeController.Instance.ReleaseGrenade(gameObject);
+    }
+
+    private void PlayExplosionSound()
+    {
         if (audioManager != null)
         {
             audioManager.PlayExplosionSound();
         }
+    }
 
+    private void TriggerExplosionEffect()
+    {
         if (isGrounded && groundExplosionEffect != null)
         {
             Vector3 explosionPosition = new Vector3(transform.position.x, transform.position.y + groundExplosionYOffset, transform.position.z);
@@ -70,12 +83,14 @@ public class Grenade : MonoBehaviour
         }
         else if (!isGrounded && airExplosionEffect != null)
         {
-            // Instantiate air explosion effect with air Y offset
             Vector3 explosionPosition = new Vector3(transform.position.x, transform.position.y + airExplosionYOffset, transform.position.z);
             ParticleSystem explosionInstance = Instantiate(airExplosionEffect, explosionPosition, transform.rotation);
             Destroy(explosionInstance.gameObject, explosionInstance.main.duration);
         }
+    }
 
+    private void ApplyExplosionForceAndDamage()
+    {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
 
         foreach (Collider2D nearbyObject in colliders)
@@ -93,9 +108,8 @@ public class Grenade : MonoBehaviour
                 animatedEnemyController.TakeDamage(damage);
             }
         }
-        ResetGrenade();
-        GrenadeController.Instance.ReleaseGrenade(gameObject);
     }
+
 
     void OnCollisionEnter2D(Collision2D collision)
     {
