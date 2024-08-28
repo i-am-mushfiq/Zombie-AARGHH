@@ -10,29 +10,19 @@ public class Grenade : MonoBehaviour
     public float explosionForce = 700f;
     public int damage = 1;
 
-    public float groundExplosionYOffset = 2f; // Offset for the explosion when on the ground
-    public float airExplosionYOffset = 2f;   // Offset for the explosion when in the air
+    public float groundExplosionYOffset = 2f;
+    public float airExplosionYOffset = 2f;
 
-    public ParticleSystem groundExplosionEffect;  // Particle system for ground explosion
-    public ParticleSystem airExplosionEffect;     // Particle system for air explosion
     private GrenadeAudioManager audioManager;
 
     private bool hasExploded = false;
-    private bool isGrounded = false;  // Tracks whether the grenade is on the ground
+    private bool isGrounded = false;
     private float countdown;
-
-    void Awake()
-    {
-        // Singleton pattern setup
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-    }
 
     void Start()
     {
-        countdown = explosionDelay;
+        // Initialize properties
+        ResetGrenade();
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.AddForce(transform.right * throwForce, ForceMode2D.Impulse);
@@ -66,20 +56,25 @@ public class Grenade : MonoBehaviour
             audioManager.PlayExplosionSound();
         }
 
-        // Choose explosion effect based on grounded state
-        if (isGrounded && groundExplosionEffect != null)
+        if (isGrounded)
         {
-            // Instantiate ground explosion effect with ground Y offset
             Vector3 explosionPosition = new Vector3(transform.position.x, transform.position.y + groundExplosionYOffset, transform.position.z);
-            ParticleSystem explosionInstance = Instantiate(groundExplosionEffect, explosionPosition, transform.rotation);
-            Destroy(explosionInstance.gameObject, explosionInstance.main.duration);  // Destroy after the effect finishes
+            ParticleSystem explosionInstance = GroundExplosionPool.Instance.GetGroundExplosion();
+            explosionInstance.transform.position = explosionPosition;
+            explosionInstance.transform.rotation = transform.rotation;
+            explosionInstance.Play();
+
+            GroundExplosionPool.Instance.ReleaseGroundExplosion(explosionInstance);
         }
-        else if (!isGrounded && airExplosionEffect != null)
+        else
         {
-            // Instantiate air explosion effect with air Y offset
             Vector3 explosionPosition = new Vector3(transform.position.x, transform.position.y + airExplosionYOffset, transform.position.z);
-            ParticleSystem explosionInstance = Instantiate(airExplosionEffect, explosionPosition, transform.rotation);
-            Destroy(explosionInstance.gameObject, explosionInstance.main.duration);  // Destroy after the effect finishes
+            ParticleSystem explosionInstance = AirExplosionPool.Instance.GetAirExplosion();
+            explosionInstance.transform.position = explosionPosition;
+            explosionInstance.transform.rotation = transform.rotation;
+            explosionInstance.Play();
+
+            AirExplosionPool.Instance.ReleaseAirExplosion(explosionInstance);
         }
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
@@ -100,25 +95,21 @@ public class Grenade : MonoBehaviour
             }
         }
 
-        // Destroy the grenade itself after the explosion
-        Destroy(gameObject);
+        ResetGrenade();
+        GrenadeController.Instance.ReleaseGrenade(gameObject);
     }
 
-    // Detect collision with the ground to determine if the grenade is grounded
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Assuming that any collision with a non-trigger collider means the grenade is grounded
-        if (collision.collider.isTrigger == false)
+        if (!collision.collider.isTrigger)
         {
             isGrounded = true;
         }
     }
 
-    // Detect when the grenade is no longer in contact with the ground
     void OnCollisionExit2D(Collision2D collision)
     {
-        // If the grenade is no longer in contact with any non-trigger collider, it's no longer grounded
-        if (collision.collider.isTrigger == false)
+        if (!collision.collider.isTrigger)
         {
             isGrounded = false;
         }
@@ -128,5 +119,11 @@ public class Grenade : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, explosionRadius);
+    }
+    private void ResetGrenade()
+    {
+        hasExploded = false;
+        isGrounded = false;
+        countdown = explosionDelay;
     }
 }
