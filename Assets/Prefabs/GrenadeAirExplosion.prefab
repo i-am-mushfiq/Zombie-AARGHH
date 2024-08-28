@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4123841665483601753}
   - component: {fileID: 8199702958857011924}
   m_Layer: 0
-  m_Name: Grenade Above Ground Particles
+  m_Name: GrenadeAirExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

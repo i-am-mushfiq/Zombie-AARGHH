@@ -12,19 +12,35 @@ public class GroundExplosionPool : MonoBehaviour
     void Awake()
     {
         Instance = this;
+
+        if (groundExplosionPrefab == null)
+        {
+            Debug.LogError("GroundExplosionPrefab is not assigned in the inspector!");
+            return;
+        }
+
         groundExplosionPool = new ObjectPool<ParticleSystem>(
             CreateGroundExplosion,
             OnGetGroundExplosion,
             OnReleaseGroundExplosion,
-            OnDestroyGroundExplosion);
+            OnDestroyGroundExplosion,
+            false, // Collection check
+            5, // Default capacity
+            10 // Max size of pool
+        );
 
         Debug.Log("GroundExplosionPool initialized.");
+
+        // Pre-populate the pool with 5 instances
+        PrepopulatePool(5);
     }
 
     private ParticleSystem CreateGroundExplosion()
     {
         Debug.Log("Creating new ground explosion instance.");
-        return Instantiate(groundExplosionPrefab);
+        var explosion = Instantiate(groundExplosionPrefab);
+        explosion.gameObject.SetActive(false);
+        return explosion;
     }
 
     private void OnGetGroundExplosion(ParticleSystem explosion)
@@ -55,5 +71,16 @@ public class GroundExplosionPool : MonoBehaviour
     {
         Debug.Log("Ground explosion released.");
         groundExplosionPool.Release(explosion);
+    }
+
+    private void PrepopulatePool(int initialSize)
+    {
+        for (int i = 0; i < initialSize; i++)
+        {
+            ParticleSystem explosion = groundExplosionPool.Get();
+            groundExplosionPool.Release(explosion);
+        }
+
+        Debug.Log($"{initialSize} ground explosions pre-populated in the pool.");
     }
 }

@@ -13,16 +13,22 @@ public class Grenade : MonoBehaviour
     public float groundExplosionYOffset = 2f;
     public float airExplosionYOffset = 2f;
 
+    public ParticleSystem groundExplosionEffect;
+    public ParticleSystem airExplosionEffect;
     private GrenadeAudioManager audioManager;
 
     private bool hasExploded = false;
     private bool isGrounded = false;
     private float countdown;
 
+    void Awake()
+    {
+
+    }
+
     void Start()
     {
-        // Initialize properties
-        ResetGrenade();
+        countdown = explosionDelay;
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.AddForce(transform.right * throwForce, ForceMode2D.Impulse);
@@ -56,25 +62,18 @@ public class Grenade : MonoBehaviour
             audioManager.PlayExplosionSound();
         }
 
-        if (isGrounded)
+        if (isGrounded && groundExplosionEffect != null)
         {
             Vector3 explosionPosition = new Vector3(transform.position.x, transform.position.y + groundExplosionYOffset, transform.position.z);
-            ParticleSystem explosionInstance = GroundExplosionPool.Instance.GetGroundExplosion();
-            explosionInstance.transform.position = explosionPosition;
-            explosionInstance.transform.rotation = transform.rotation;
-            explosionInstance.Play();
-
-            GroundExplosionPool.Instance.ReleaseGroundExplosion(explosionInstance);
+            ParticleSystem explosionInstance = Instantiate(groundExplosionEffect, explosionPosition, transform.rotation);
+            Destroy(explosionInstance.gameObject, explosionInstance.main.duration);
         }
-        else
+        else if (!isGrounded && airExplosionEffect != null)
         {
+            // Instantiate air explosion effect with air Y offset
             Vector3 explosionPosition = new Vector3(transform.position.x, transform.position.y + airExplosionYOffset, transform.position.z);
-            ParticleSystem explosionInstance = AirExplosionPool.Instance.GetAirExplosion();
-            explosionInstance.transform.position = explosionPosition;
-            explosionInstance.transform.rotation = transform.rotation;
-            explosionInstance.Play();
-
-            AirExplosionPool.Instance.ReleaseAirExplosion(explosionInstance);
+            ParticleSystem explosionInstance = Instantiate(airExplosionEffect, explosionPosition, transform.rotation);
+            Destroy(explosionInstance.gameObject, explosionInstance.main.duration);
         }
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
@@ -94,14 +93,13 @@ public class Grenade : MonoBehaviour
                 animatedEnemyController.TakeDamage(damage);
             }
         }
-
         ResetGrenade();
         GrenadeController.Instance.ReleaseGrenade(gameObject);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.collider.isTrigger)
+        if (collision.collider.isTrigger == false)
         {
             isGrounded = true;
         }
@@ -109,10 +107,9 @@ public class Grenade : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (!collision.collider.isTrigger)
+        if (collision.collider.isTrigger == false)
         {
             isGrounded = false;
-            // The
         }
     }
 
