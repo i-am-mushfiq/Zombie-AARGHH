@@ -2,15 +2,23 @@ using UnityEngine;
 
 public class GrenadeAudioManager : MonoBehaviour
 {
-    public AudioSource throwSound;      // AudioSource for throw sound
-    public AudioSource explosionSound;  // AudioSource for explosion sound
+    public static GrenadeAudioManager Instance { get; private set; }
 
-    void Awake()
+    public AudioSource throwSound;
+    public AudioSource tickSound;
+    public AudioSource explosionSound;
+
+    private void Awake()
     {
-        // Ensure that the AudioSources are assigned
-        if (throwSound == null || explosionSound == null)
+        // Implement the singleton pattern
+        if (Instance == null)
         {
-            Debug.LogError("AudioSources for throwSound or explosionSound are not assigned.");
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -18,7 +26,7 @@ public class GrenadeAudioManager : MonoBehaviour
     {
         if (throwSound != null)
         {
-            throwSound.Play();  // Play the throw sound
+            throwSound.Play();
         }
         else
         {
@@ -30,7 +38,7 @@ public class GrenadeAudioManager : MonoBehaviour
     {
         if (explosionSound != null)
         {
-            explosionSound.Play();  // Play the explosion sound
+            explosionSound.Play();
         }
         else
         {

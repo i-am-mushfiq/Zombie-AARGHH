@@ -12,7 +12,6 @@ public class Grenade : MonoBehaviour
 
     public ParticleSystem groundExplosionEffect;
     public ParticleSystem airExplosionEffect;
-    private GrenadeAudioManager audioManager;
 
     private bool hasExploded = false;
     private bool isGrounded = false;
@@ -22,10 +21,14 @@ public class Grenade : MonoBehaviour
     {
         countdown = explosionDelay;
 
-        audioManager = GetComponent<GrenadeAudioManager>();
-        if (audioManager != null)
+        // Access the singleton instance of GrenadeAudioManager
+        if (GrenadeAudioManager.Instance != null)
         {
-            audioManager.PlayThrowSound();  // Play throw sound
+            GrenadeAudioManager.Instance.PlayThrowSound();  // Play throw sound
+        }
+        else
+        {
+            Debug.LogWarning("GrenadeAudioManager singleton instance is not available.");
         }
     }
 
@@ -56,9 +59,13 @@ public class Grenade : MonoBehaviour
 
     private void PlayExplosionSound()
     {
-        if (audioManager != null)
+        if (GrenadeAudioManager.Instance != null)
         {
-            audioManager.PlayExplosionSound();
+            GrenadeAudioManager.Instance.PlayExplosionSound();
+        }
+        else
+        {
+            Debug.LogWarning("GrenadeAudioManager singleton instance is not available.");
         }
     }
 
@@ -101,7 +108,7 @@ public class Grenade : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.isTrigger == false)
+        if (!collision.collider.isTrigger)
         {
             isGrounded = true;
         }
@@ -109,7 +116,7 @@ public class Grenade : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.collider.isTrigger == false)
+        if (!collision.collider.isTrigger)
         {
             isGrounded = false;
         }
