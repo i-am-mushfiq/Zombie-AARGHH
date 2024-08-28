@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class Grenade : MonoBehaviour
 {
-    public static Grenade Instance { get; private set; }
-
-    public float throwForce = 10f;
     public float explosionDelay = 3f;
     public float explosionRadius = 5f;
     public float explosionForce = 700f;
@@ -21,17 +18,9 @@ public class Grenade : MonoBehaviour
     private bool isGrounded = false;
     private float countdown;
 
-    void Awake()
-    {
-
-    }
-
     void Start()
     {
         countdown = explosionDelay;
-
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(transform.right * throwForce, ForceMode2D.Impulse);
 
         audioManager = GetComponent<GrenadeAudioManager>();
         if (audioManager != null)
@@ -110,7 +99,6 @@ public class Grenade : MonoBehaviour
         }
     }
 
-
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.isTrigger == false)
@@ -132,6 +120,7 @@ public class Grenade : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, explosionRadius);
     }
+
     private void ResetGrenade()
     {
         hasExploded = false;
