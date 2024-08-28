@@ -112,6 +112,7 @@ public class Grenade : MonoBehaviour
         if (!collision.collider.isTrigger)
         {
             isGrounded = false;
+            // The
         }
     }
 
