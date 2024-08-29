@@ -266,7 +266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 29370228}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GameObject (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 32858967}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -671,7 +671,7 @@ GameObject:
   m_Component:
   - component: {fileID: 157324297}
   - component: {fileID: 157324298}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (5)
   m_TagString: Untagged
@@ -756,7 +756,7 @@ GameObject:
   m_Component:
   - component: {fileID: 165967590}
   - component: {fileID: 165967591}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (5)
   m_TagString: Untagged
@@ -964,7 +964,7 @@ GameObject:
   m_Component:
   - component: {fileID: 215887643}
   - component: {fileID: 215887644}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (7)
   m_TagString: Untagged
@@ -1807,7 +1807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 490836718}
   - component: {fileID: 490836717}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Platform
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1977,7 +1977,7 @@ GameObject:
   m_Component:
   - component: {fileID: 514665207}
   - component: {fileID: 514665208}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (2)
   m_TagString: Untagged
@@ -2377,7 +2377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 544155666}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GameObject (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2580,7 +2580,7 @@ GameObject:
   m_Component:
   - component: {fileID: 612182256}
   - component: {fileID: 612182257}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3037,7 +3037,7 @@ GameObject:
   m_Component:
   - component: {fileID: 803260333}
   - component: {fileID: 803260334}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (1)
   m_TagString: Untagged
@@ -3199,7 +3199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 842893291}
   - component: {fileID: 842893292}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (7)
   m_TagString: Untagged
@@ -3417,7 +3417,7 @@ GameObject:
   m_Component:
   - component: {fileID: 901388871}
   - component: {fileID: 901388872}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (1)
   m_TagString: Untagged
@@ -3531,7 +3531,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 922461005}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 044035ca0a4c40b4295a04443d4ff45f, type: 3}
   m_Name: 
@@ -3553,7 +3553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 928597527}
   - component: {fileID: 928597528}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (3)
   m_TagString: Untagged
@@ -3638,7 +3638,7 @@ GameObject:
   m_Component:
   - component: {fileID: 967350120}
   - component: {fileID: 967350121}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (6)
   m_TagString: Untagged
@@ -3995,7 +3995,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1036798088}
   - component: {fileID: 1036798089}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4170,7 +4170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1072727410}
   - component: {fileID: 1072727411}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (6)
   m_TagString: Untagged
@@ -4299,7 +4299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1097982906}
   - component: {fileID: 1097982907}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (2)
   m_TagString: Untagged
@@ -4384,7 +4384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1106952661}
   - component: {fileID: 1106952662}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (1)
   m_TagString: Untagged
@@ -5073,7 +5073,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1343625878}
   - component: {fileID: 1343625879}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (4)
   m_TagString: Untagged
@@ -5244,7 +5244,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1352829480}
   - component: {fileID: 1352829481}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (3)
   m_TagString: Untagged
@@ -6075,7 +6075,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1540959461}
   - component: {fileID: 1540959460}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Platform (2)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -6157,7 +6157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1568772309}
   - component: {fileID: 1568772310}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (7)
   m_TagString: Untagged
@@ -6242,7 +6242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1572108867}
   - component: {fileID: 1572108868}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (4)
   m_TagString: Untagged
@@ -6332,7 +6332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1604955551}
   - component: {fileID: 1604955552}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (4)
   m_TagString: Untagged
@@ -6417,7 +6417,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1607656105}
   - component: {fileID: 1607656106}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (5)
   m_TagString: Untagged
@@ -6724,7 +6724,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1616183559}
   - component: {fileID: 1616183560}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7192,7 +7192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1783427369}
   - component: {fileID: 1783427370}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (3)
   m_TagString: Untagged
@@ -8008,7 +8008,7 @@ Transform:
   m_GameObject: {fileID: 1974434647}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.78, y: -1.15, z: 0}
+  m_LocalPosition: {x: 1.24, y: -1.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8202,7 +8202,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2012776160}
   - component: {fileID: 2012776161}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (6)
   m_TagString: Untagged
@@ -8292,7 +8292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2038111917}
   - component: {fileID: 2038111916}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Platform (1)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -8480,7 +8480,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2100263381}
   - component: {fileID: 2100263382}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: vecteezy_brick-wall-red-logo-of-construction-company_6390159-transformed
     (2)
   m_TagString: Untagged
@@ -12377,6 +12377,7 @@ GameObject:
   - component: {fileID: 7652661769217758979}
   - component: {fileID: 7652661769217758980}
   - component: {fileID: 7652661769217758981}
+  - component: {fileID: 7652661769217758983}
   - component: {fileID: 7652661769217758982}
   m_Layer: 0
   m_Name: Player
@@ -14978,10 +14979,25 @@ MonoBehaviour:
   throwPoint: {fileID: 1974434648}
   throwForce: 6
   throwAngle: 60
-  maxPoints: 50
+--- !u!114 &7652661769217758982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4406851181719474658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32f5d3db6218014c96500bb51aacb8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPoints: 200
   increment: 0.025
   rayOverlap: 1.1
---- !u!120 &7652661769217758982
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!120 &7652661769217758983
 LineRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -15002,7 +15018,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4843168706ff8fd4ea74640baecae831, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15033,8 +15049,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.012004852
-        value: 0.03401375
+        time: 0.011947632
+        value: 0.02720642
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -15078,7 +15094,7 @@ LineRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
-    textureScale: {x: 0.1, y: 0.1}
+    textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
   m_MaskInteraction: 0

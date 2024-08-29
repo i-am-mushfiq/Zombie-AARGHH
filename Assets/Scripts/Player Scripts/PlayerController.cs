@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,7 +29,11 @@ public class PlayerController : MonoBehaviour
     private PlayerJumpController playerJumpController;
     private GrenadeController grenadeController;// Reference to PlayerJumpController
 
+    public static event UnityAction<bool> OnFlip;
+
     public float overlapRadius;
+    private bool isMoving; // New boolean to track if the player is moving
+
     void Awake()
     {
         controlsEnabled = true;
@@ -37,8 +42,16 @@ public class PlayerController : MonoBehaviour
         playerJumpController = GetComponent<PlayerJumpController>(); // Get reference to PlayerJumpController
         grenadeController = GetComponent<GrenadeController>();
 
-        playerInputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
-        playerInputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+        playerInputActions.Player.Move.performed += ctx =>
+        {
+            moveInput = ctx.ReadValue<Vector2>();
+            isMoving = moveInput.x != 0; // Update isMoving based on input
+        };
+        playerInputActions.Player.Move.canceled += ctx =>
+        {
+            moveInput = Vector2.zero;
+            isMoving = false; // Player stopped moving
+        };
         playerInputActions.Player.Jump.performed += ctx => playerJumpController.Jump(); // Delegate jump to PlayerJumpController
         playerInputActions.Player.Shoot.performed += ctx => Shoot();
         playerInputActions.Player.Reload.performed += ctx => Reload();
@@ -94,8 +107,8 @@ public class PlayerController : MonoBehaviour
     {
         playerJumpController.SetGroundedState(Physics2D.OverlapCircle(groundCheckPoint.position, overlapRadius, groundLayer));
         return Physics2D.OverlapCircle(groundCheckPoint.position, overlapRadius, groundLayer);
-        
     }
+
     void OnDrawGizmos()
     {
         // Draw a red circle around the ground check point
@@ -104,6 +117,21 @@ public class PlayerController : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(groundCheckPoint.position, overlapRadius);
         }
+    }
+
+    public float MoveSpeed // Getter for moveSpeed
+    {
+        get { return moveSpeed; }
+    }
+
+    public bool IsMoving // Getter for isMoving
+    {
+        get { return isMoving; }
+    }
+
+    public bool CheckIfMoving() // Function to return if the player is moving
+    {
+        return isMoving;
     }
 
     public bool IsFacingRight()
@@ -117,6 +145,7 @@ public class PlayerController : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+        OnFlip?.Invoke(isFacingRight);
     }
 
     void Dash()

@@ -110,9 +110,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!70 &5525068201585695718
 CapsuleCollider2D:
@@ -161,7 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38c17da5f8e0f5c448ea8c4013df295a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwForce: 2
   explosionDelay: 3
   explosionRadius: 2.88
   explosionForce: 700

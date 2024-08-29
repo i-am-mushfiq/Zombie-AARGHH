@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-[RequireComponent(typeof(LineRenderer))]
 public class GrenadeController : MonoBehaviour
 {
     public static GrenadeController Instance { get; private set; }
@@ -12,10 +11,9 @@ public class GrenadeController : MonoBehaviour
     public float throwAngle = 45f;
 
     private ObjectPool<GameObject> grenadePool;
-    private LineRenderer trajectoryLine;
-    public int maxPoints = 50;
-    public float increment = 0.025f;
-    public float rayOverlap = 1.1f;
+    private bool throwRight = true;
+
+    private PlayerController playerController; // Reference to PlayerController
 
     private void Awake()
     {
@@ -25,6 +23,16 @@ public class GrenadeController : MonoBehaviour
             return;
         }
         Instance = this;
+    }
+
+    private void OnEnable()
+    {
+        PlayerController.OnFlip += UpdateThrowDirection;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.OnFlip -= UpdateThrowDirection;
     }
 
     void Start()
@@ -39,10 +47,8 @@ public class GrenadeController : MonoBehaviour
             maxSize: 20
         );
 
-        trajectoryLine = GetComponent<LineRenderer>();
-        trajectoryLine.positionCount = maxPoints;
-
-        ShowTrajectory();
+        TrajectoryManager.Instance.ShowTrajectory();
+        playerController = FindObjectOfType<PlayerController>(); // Get the PlayerController instance
     }
 
     void Update()
@@ -52,6 +58,8 @@ public class GrenadeController : MonoBehaviour
 
     public void Throw(bool throwRight)
     {
+        this.throwRight = throwRight;
+
         if (grenadePrefab == null || throwPoint == null)
         {
             Debug.Log("GrenadePrefab or ThrowPoint is not assigned.");
@@ -65,15 +73,8 @@ public class GrenadeController : MonoBehaviour
         Rigidbody2D rb = grenade.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            float radians = throwAngle * Mathf.Deg2Rad;
-            Vector2 throwDirection = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians));
-
-            if (!throwRight)
-            {
-                throwDirection.x *= -1;
-            }
-
-            rb.AddForce(throwDirection * throwForce, ForceMode2D.Impulse);
+            Vector2 initialVelocity = CalculateInitialVelocity();
+            rb.AddForce(initialVelocity, ForceMode2D.Impulse);
         }
         else
         {
@@ -88,53 +89,33 @@ public class GrenadeController : MonoBehaviour
 
     private void PredictTrajectory()
     {
-        Vector2 velocity = CalculateInitialVelocity();
-        Vector2 position = throwPoint.position;
+        Vector2 initialVelocity = CalculateInitialVelocity();
+        Vector2 initialPosition = throwPoint.position;
 
-        for (int i = 0; i < maxPoints; i++)
-        {
-            // Calculate the next position in the trajectory
-            Vector2 nextPosition = position + velocity * increment;
-
-            // Check if the next position hits an object with the "Ground" tag
-            RaycastHit2D hit = Physics2D.Raycast(position, velocity.normalized, velocity.magnitude * increment);
-            if (hit.collider != null && hit.collider.CompareTag("Ground"))
-            {
-                // If "Ground" is hit, stop the trajectory prediction
-                trajectoryLine.positionCount = i + 1;
-                trajectoryLine.SetPosition(i, hit.point);
-                break;
-            }
-
-            // Set the position in the LineRenderer
-            trajectoryLine.SetPosition(i, new Vector3(position.x, position.y, 0f));
-
-            // Update position and velocity for the next iteration
-            position = nextPosition;
-            velocity = CalculateNewVelocity(velocity, increment);
-        }
+        TrajectoryManager.Instance.PredictTrajectory(initialPosition, initialVelocity);
     }
 
     private Vector2 CalculateInitialVelocity()
     {
         float radians = throwAngle * Mathf.Deg2Rad;
         Vector2 throwDirection = new Vector2(Mathf.Cos(radians), Mathf.Sin(radians)) * throwForce;
+
+        if (playerController != null && playerController.IsMoving) // Check if the player is moving
+        {
+            float moveSpeed = playerController.MoveSpeed; // Get the move speed
+            throwDirection += throwDirection.normalized * moveSpeed; // Adjust the throw direction based on move speed
+        }
+
+        if (!throwRight)
+        {
+            throwDirection.x *= -1;
+        }
+
         return throwDirection;
     }
 
-    private Vector2 CalculateNewVelocity(Vector2 velocity, float increment)
+    private void UpdateThrowDirection(bool facingRight)
     {
-        velocity += Physics2D.gravity * increment;
-        return velocity;
-    }
-
-    private void ShowTrajectory()
-    {
-        trajectoryLine.enabled = true;
-    }
-
-    private void HideTrajectory()
-    {
-        trajectoryLine.enabled = false;
+        throwRight = facingRight;
     }
 }
