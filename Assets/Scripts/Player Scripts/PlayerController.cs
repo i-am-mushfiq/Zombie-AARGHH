@@ -56,7 +56,8 @@ public class PlayerController : MonoBehaviour
         playerInputActions.Player.Shoot.performed += ctx => Shoot();
         playerInputActions.Player.Reload.performed += ctx => Reload();
         playerInputActions.Player.Dash.performed += ctx => Dash();
-        playerInputActions.Player.Grenade.performed += ctx => grenadeController.Throw(isFacingRight);
+        playerInputActions.Player.Grenade.performed += ctx => grenadeController.ToggleTrajectory(true);
+        playerInputActions.Player.Grenade.canceled += ctx => grenadeController.Throw(isFacingRight);
     }
 
     void OnEnable()

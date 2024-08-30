@@ -12,6 +12,7 @@ public class GrenadeController : MonoBehaviour
 
     private ObjectPool<GameObject> grenadePool;
     private bool throwRight = true;
+    private bool showTrajectory = false; // Start with trajectory hidden
 
     private PlayerController playerController; // Reference to PlayerController
 
@@ -47,13 +48,18 @@ public class GrenadeController : MonoBehaviour
             maxSize: 20
         );
 
-        TrajectoryManager.Instance.ShowTrajectory();
         playerController = FindObjectOfType<PlayerController>(); // Get the PlayerController instance
+
+        // Initially hide the trajectory
+        ToggleTrajectory(false);
     }
 
     void Update()
     {
-        PredictTrajectory();
+        if (showTrajectory)
+        {
+            PredictTrajectory();
+        }
     }
 
     public void Throw(bool throwRight)
@@ -75,6 +81,9 @@ public class GrenadeController : MonoBehaviour
         {
             Vector2 initialVelocity = CalculateInitialVelocity();
             rb.AddForce(initialVelocity, ForceMode2D.Impulse);
+
+            // Hide the trajectory after throwing the grenade
+            ToggleTrajectory(false);
         }
         else
         {
@@ -117,5 +126,20 @@ public class GrenadeController : MonoBehaviour
     private void UpdateThrowDirection(bool facingRight)
     {
         throwRight = facingRight;
+    }
+
+    // Function to toggle trajectory visibility
+    public void ToggleTrajectory(bool shouldShow)
+    {
+        showTrajectory = shouldShow;
+
+        if (shouldShow)
+        {
+            TrajectoryManager.Instance.ShowTrajectory();
+        }
+        else
+        {
+            TrajectoryManager.Instance.HideTrajectory();
+        }
     }
 }

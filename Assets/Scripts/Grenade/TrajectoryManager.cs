@@ -43,19 +43,19 @@ public class TrajectoryManager : MonoBehaviour
 
             if (hit.collider != null)
             {
-                Debug.Log($"Hit detected with {hit.collider.name} at position {hit.point}");
+                //Debug.Log($"Hit detected with {hit.collider.name} at position {hit.point}");
                 if (hit.collider.CompareTag("Ground"))
                 {
-                    Debug.Log("Hit Ground");
+                    //Debug.Log("Hit Ground");
                     trajectoryLine.positionCount = i + 1;
                     trajectoryLine.SetPosition(i, hit.point);
 
-                    Debug.Log("Stopping the trajectory here.");
+                    //Debug.Log("Stopping the trajectory here.");
                     break;
                 }
             }
 
-            Debug.Log($"No hit detected, setting trajectory point at {position}");
+            //Debug.Log($"No hit detected, setting trajectory point at {position}");
 
             trajectoryLine.SetPosition(i, new Vector3(position.x, position.y, 0f)); // Set the next position in the trajectory
 
