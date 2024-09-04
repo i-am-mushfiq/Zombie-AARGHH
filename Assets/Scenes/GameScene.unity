@@ -1375,7 +1375,7 @@ Transform:
   m_GameObject: {fileID: 336591201}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -0.01700005, z: -2}
+  m_LocalPosition: {x: -5.138, y: 0.0100001395, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2138,7 +2138,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -0.01700005, z: -2}
+  m_LocalPosition: {x: -1.2113976, y: 0.015149999, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8809,7 +8809,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0026855469, y: -53.99994}
+  m_AnchoredPosition: {x: -0.0026855469, y: -54}
   m_SizeDelta: {x: -0.0048828, y: 0.0018311}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &245854366630657367
@@ -12530,7 +12530,7 @@ Transform:
   m_GameObject: {fileID: 4406851181719474658}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.147, z: 0}
+  m_LocalPosition: {x: -5.638, y: -2.12, z: 0}
   m_LocalScale: {x: 0.5386, y: 0.5232, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14842,14 +14842,15 @@ MonoBehaviour:
   jumpBufferTime: 0.1
   fallSpeedMultiplier: 4
   upwardSpeedMultiplier: 1.2
-  ledgeDetectionRadius: 0.53
+  ledgeDetectionRadius: 0.2
   ledgeDetectionOffsetX: 0.52
-  ledgeDetectionOffsetY: -0.55
+  ledgeDetectionOffsetY: -0.74
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   pushUpSpeed: 1
   pushUpTime: 0.1
+  pushOnX: 0.3
 --- !u!114 &7652661769217758981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15063,15 +15064,15 @@ TrailRenderer:
       serializedVersion: 2
       key0: {r: 1, g: 0.11792451, b: 0.11792451, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key2: {r: 0, g: 0.4976437, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65535
-      ctime2: 0
+      ctime1: 55127
+      ctime2: 65535
       ctime3: 0
       ctime4: 0
       ctime5: 0
@@ -15087,7 +15088,7 @@ TrailRenderer:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 2
+      m_NumColorKeys: 3
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0

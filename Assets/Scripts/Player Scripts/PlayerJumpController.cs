@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Rendering;
+using TMPro;
 
 public class PlayerJumpController : MonoBehaviour
 {
@@ -21,11 +23,16 @@ public class PlayerJumpController : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded = false;
     private bool isPushingUp = false;
+    private bool hasPushedUp = false; // New flag to track if push-up has been performed
+    public float pushOnX = 0.3f;
     private Vector2 ledgePosition;
+
+    private PlayerController playerController;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerController = GetComponent<PlayerController>();
     }
 
     void Update()
@@ -76,6 +83,7 @@ public class PlayerJumpController : MonoBehaviour
             }
 
             isGrounded = false;
+            hasPushedUp = false; // Reset the flag when jumping
         }
         else
         {
@@ -85,7 +93,7 @@ public class PlayerJumpController : MonoBehaviour
 
     void HandleEdgeDetection()
     {
-        if (isPushingUp) return;
+        if (isPushingUp || hasPushedUp) return; // Check if already pushed up
 
         // Right side ledge detection
         Vector2 circlePosRight = new Vector2(transform.position.x + ledgeDetectionOffsetX, transform.position.y + ledgeDetectionOffsetY);
@@ -98,6 +106,7 @@ public class PlayerJumpController : MonoBehaviour
                 Debug.Log("Ledge detected on the right side.");
                 ledgePosition = new Vector2(circlePosRight.x, circlePosRight.y);
                 StartCoroutine(PushUpCoroutine());
+                hasPushedUp = true; // Set the flag after push-up
                 return; // Exit the method after detecting a ledge on the right
             }
         }
@@ -113,6 +122,7 @@ public class PlayerJumpController : MonoBehaviour
                 Debug.Log("Ledge detected on the left side.");
                 ledgePosition = new Vector2(circlePosLeft.x, circlePosLeft.y);
                 StartCoroutine(PushUpCoroutine());
+                hasPushedUp = true; // Set the flag after push-up
             }
         }
     }
@@ -121,7 +131,15 @@ public class PlayerJumpController : MonoBehaviour
     {
         isPushingUp = true;
         Vector2 startPosition = transform.position;
-        Vector2 targetPosition = new Vector2(startPosition.x, startPosition.y + pushUpSpeed);
+        Vector2 targetPosition;
+        if (playerController.IsFacingRight())
+        {
+            targetPosition = new Vector2(startPosition.x + pushOnX, startPosition.y + pushUpSpeed);
+        }
+        else
+        {
+            targetPosition = new Vector2(startPosition.x - pushOnX, startPosition.y + pushUpSpeed);
+        }
         float elapsedTime = 0f;
 
         while (elapsedTime < pushUpTime)
@@ -141,6 +159,7 @@ public class PlayerJumpController : MonoBehaviour
         if (grounded)
         {
             rb.isKinematic = false;
+            hasPushedUp = false; // Reset the flag when grounded
         }
     }
 
