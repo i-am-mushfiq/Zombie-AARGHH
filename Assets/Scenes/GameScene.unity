@@ -8809,7 +8809,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0026855469, y: -53.99991}
+  m_AnchoredPosition: {x: -0.0026855469, y: -53.99994}
   m_SizeDelta: {x: -0.0048828, y: 0.0018311}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &245854366630657367
@@ -14842,6 +14842,14 @@ MonoBehaviour:
   jumpBufferTime: 0.1
   fallSpeedMultiplier: 4
   upwardSpeedMultiplier: 1.2
+  ledgeDetectionRadius: 0.53
+  ledgeDetectionOffsetX: 0.52
+  ledgeDetectionOffsetY: -0.55
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  pushUpSpeed: 1
+  pushUpTime: 0.1
 --- !u!114 &7652661769217758981
 MonoBehaviour:
   m_ObjectHideFlags: 0
