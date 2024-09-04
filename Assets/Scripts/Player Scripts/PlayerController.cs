@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     public GameObject dashAvailableCanvas;
 
     public Transform shootPoint;
-    public Transform groundCheckPoint; // New Transform for ground check
-    public LayerMask groundLayer; // LayerMask to specify ground layers
+    public Transform groundCheckPoint;
+    public LayerMask groundLayer;
 
     public PlayerInputActions playerInputActions;
     private Rigidbody2D rb;
@@ -27,32 +27,32 @@ public class PlayerController : MonoBehaviour
     private bool isDashing = false;
 
     private PlayerJumpController playerJumpController;
-    private GrenadeController grenadeController;// Reference to PlayerJumpController
+    private GrenadeController grenadeController;
 
     public static event UnityAction<bool> OnFlip;
 
     public float overlapRadius;
-    private bool isMoving; // New boolean to track if the player is moving
+    private bool isMoving; 
 
     void Awake()
     {
         controlsEnabled = true;
         playerInputActions = new PlayerInputActions();
         rb = GetComponent<Rigidbody2D>();
-        playerJumpController = GetComponent<PlayerJumpController>(); // Get reference to PlayerJumpController
+        playerJumpController = GetComponent<PlayerJumpController>();
         grenadeController = GetComponent<GrenadeController>();
 
         playerInputActions.Player.Move.performed += ctx =>
         {
             moveInput = ctx.ReadValue<Vector2>();
-            isMoving = moveInput.x != 0; // Update isMoving based on input
+            isMoving = moveInput.x != 0; 
         };
         playerInputActions.Player.Move.canceled += ctx =>
         {
             moveInput = Vector2.zero;
-            isMoving = false; // Player stopped moving
+            isMoving = false; 
         };
-        playerInputActions.Player.Jump.performed += ctx => playerJumpController.Jump(); // Delegate jump to PlayerJumpController
+        playerInputActions.Player.Jump.performed += ctx => playerJumpController.Jump();
         playerInputActions.Player.Shoot.performed += ctx => Shoot();
         playerInputActions.Player.Reload.performed += ctx => Reload();
         playerInputActions.Player.Dash.performed += ctx => Dash();
@@ -78,18 +78,15 @@ public class PlayerController : MonoBehaviour
             Move();
         }
 
-        // Reactivate the dashAvailableCanvas if the cooldown has ended
         if (Time.time >= lastDashTime + dashCooldown)
         {
             dashAvailableCanvas.gameObject.SetActive(true);
         }
-
-        //Debug.Log("isGrounded:" + IsGrounded());
     }
 
     void Move()
     {
-        if (isDashing || !IsGrounded()) return; // Prevent movement if dashing or in the air
+        if (isDashing || !IsGrounded()) return;
 
         Vector2 moveVelocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
         rb.velocity = moveVelocity;
@@ -112,7 +109,6 @@ public class PlayerController : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        // Draw a red circle around the ground check point
         if (groundCheckPoint != null)
         {
             Gizmos.color = Color.red;
@@ -120,17 +116,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public float MoveSpeed // Getter for moveSpeed
+    public float MoveSpeed 
     {
         get { return moveSpeed; }
     }
 
-    public bool IsMoving // Getter for isMoving
+    public bool IsMoving 
     {
         get { return isMoving; }
     }
 
-    public bool CheckIfMoving() // Function to return if the player is moving
+    public bool CheckIfMoving() 
     {
         return isMoving;
     }

@@ -11,6 +11,9 @@ public class PlayerJumpController : MonoBehaviour
     public float jumpBufferTime = 0.1f;
     private float jumpBufferCounter;
 
+    public float fallSpeedMultiplier = 2.0f;
+    public float upwardSpeedMultiplier = 1.2f; // New multiplier to increase upward velocity
+
     private Rigidbody2D rb;
     private bool isGrounded = false;
 
@@ -23,6 +26,7 @@ public class PlayerJumpController : MonoBehaviour
     {
         HandleCoyoteTime();
         HandleJumpBuffer();
+        ApplyFallSpeedMultiplier();
     }
 
     void HandleCoyoteTime()
@@ -33,34 +37,42 @@ public class PlayerJumpController : MonoBehaviour
         }
         else
         {
-            coyoteTimeCounter -= Time.deltaTime; 
+            coyoteTimeCounter -= Time.deltaTime;
         }
     }
 
     void HandleJumpBuffer()
     {
-        jumpBufferCounter -= Time.deltaTime; 
+        jumpBufferCounter -= Time.deltaTime;
+    }
+
+    void ApplyFallSpeedMultiplier()
+    {
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallSpeedMultiplier - 1) * Time.deltaTime;
+        }
     }
 
     public void Jump()
     {
         if (isGrounded || coyoteTimeCounter > 0)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0); 
+            rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            coyoteTimeCounter = 0; 
-            jumpBufferCounter = 0; 
+            coyoteTimeCounter = 0;
+            jumpBufferCounter = 0;
 
             if (!isGrounded && rb.velocity.y > 0)
             {
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * jumpApexModifier);
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * jumpApexModifier * upwardSpeedMultiplier); // Apply upward speed multiplier
             }
 
-            isGrounded = false; 
+            isGrounded = false;
         }
         else
         {
-            jumpBufferCounter = jumpBufferTime; 
+            jumpBufferCounter = jumpBufferTime;
         }
     }
 
